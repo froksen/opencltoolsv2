@@ -1,0 +1,25 @@
+<RCC>
+    <qresource prefix="/">
+        <file>sounds/alarm.wav</file>
+        <file>img/fingerFive.png</file>
+        <file>img/fingerFour.png</file>
+        <file>img/fingerOne.png</file>
+        <file>img/fingerThree.png</file>
+        <file>img/fingerTwo.png</file>
+        <file>img/fingerAll.jpg</file>
+        <file>img/fingerZero.png</file>
+        <file>icon.ico</file>
+        <file>img/black_arrow.png</file>
+        <file>img/Questionmark.png</file>
+        <file>img/PowerPause_GribMig.png</file>
+        <file>img/PowerPause_Vaskehallen.png</file>
+        <file>img/PowerPause_DragesHale.png</file>
+        <file>img/Actions-insert-link-icon.png</file>
+        <file>img/Editing-Bold-icon.png</file>
+        <file>img/PowerPause_Styrbilen.png</file>
+        <file>sounds/jbcountdown.wav</file>
+        <file>fonts/24.ttf</file>
+        <file>sounds/of.mp3</file>
+        <file>img/CL_Teamplade.png</file>
+    </qresource>
+</RCC>

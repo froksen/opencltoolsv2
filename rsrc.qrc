@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/sounds">
+        <file>sounds/Temple Bell-SoundBible.com-756181215.wav</file>
+    </qresource>
+</RCC>
