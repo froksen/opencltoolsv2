@@ -2,6 +2,7 @@
 #include <QDebug>
 #include <QSqlError>
 #include <QSqlDriver>
+#include <QSqlQuery>
 
 DatabaseManager::DatabaseManager(QObject *parent) : QObject(parent)
 {
@@ -70,6 +71,28 @@ void DatabaseManager::setSelectedTable(QSqlTableModel *selectedTable)
     _selectedTable = selectedTable;
 }
 
+QStringList DatabaseManager::execMultibleList() const
+{
+    return _execMultible;
+}
+
+void DatabaseManager::setExecMultibleList(const QStringList &execMultibleList)
+{
+    _execMultible = execMultible;
+}
+
+bool DatabaseManager::execMultible()
+{
+    bool rlt = false;
+
+    foreach(QString qry,execMultibleList()){
+        rlt = exec(qry);
+    }
+
+    return rlt;
+}
+
+
 
 QString DatabaseManager::selectedTableName() const
 {
@@ -103,6 +126,17 @@ QSqlTableModel *DatabaseManager::selectTable(QString tableName)
 void DatabaseManager::refreshCurrentTable()
 {
     selectedTable()->select();
+}
+
+bool DatabaseManager::exec(QString query)
+{
+    QSqlQuery qry;
+    if(!qry.exec(query)){
+        qDebug() << "Failed to execute query:" << query << "Error:" << qry.lastError();
+        return false;
+    }
+
+    return true;
 }
 
 

@@ -12,8 +12,6 @@ class DatabaseManager : public QObject
 public:
     explicit DatabaseManager(QObject *parent = 0);
 
-
-
     QString currentTableName() const;
     void setCurrentTableName(const QString &currentTableName);
 
@@ -33,6 +31,11 @@ public:
     QSqlTableModel *selectTable();
     QSqlTableModel *selectTable(QString tableName);
     void refreshCurrentTable();
+    bool exec(QString query);
+
+
+    QStringList execMultible() const;
+    void setExecMultible(const QStringList &execMultible);
 
 public slots:
 
@@ -51,6 +54,8 @@ private:
     QSqlTableModel *selectedTable() const;
     void setSelectedTable(QSqlTableModel *selectedTable);
     QSqlTableModel *_selectedTable;
+
+    QStringList _execMultible;
 };
 
 #endif // DATABASEMANAGER_H
