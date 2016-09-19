@@ -35,7 +35,8 @@ SOURCES += main.cpp\
     dialogs/powerpauseviewer.cpp \
     tabs/CooperativeLearning/teamplate.cpp \
     tabs/groupcreator.cpp \
-    dialogs/simplesqlmanager.cpp
+    dialogs/simplesqlmanager.cpp \
+    classes/databasemanager.cpp
 
 HEADERS  += mainwindow.h \
     tabs/countdowntimer.h \
@@ -59,7 +60,8 @@ HEADERS  += mainwindow.h \
     dialogs/powerpauseviewer.h \
     tabs/CooperativeLearning/teamplate.h \
     tabs/groupcreator.h \
-    dialogs/simplesqlmanager.h
+    dialogs/simplesqlmanager.h \
+    classes/databasemanager.h
 
 
 FORMS    += mainwindow.ui \
