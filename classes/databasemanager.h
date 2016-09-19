@@ -33,10 +33,9 @@ public:
     void refreshCurrentTable();
     bool exec(QString query);
 
-
-    QStringList execMultible() const;
-    void setExecMultible(const QStringList &execMultible);
-
+    QStringList execMultibleList() const;
+    void setExecMultibleList(const QStringList &execMultibleList);
+    bool execMultible();
 public slots:
 
 signals:
@@ -55,7 +54,7 @@ private:
     void setSelectedTable(QSqlTableModel *selectedTable);
     QSqlTableModel *_selectedTable;
 
-    QStringList _execMultible;
+    QStringList _execMultibleList;
 };
 
 #endif // DATABASEMANAGER_H

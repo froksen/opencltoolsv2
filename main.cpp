@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     //a.setStyle(QStyleFactory::create("WindowsVista"));
 
     //Hoved vinduet
-    //MainWindow w;
+    MainWindow w;
 
 
     QSplashScreen *mSplashScreen = new QSplashScreen();
@@ -36,13 +36,37 @@ int main(int argc, char *argv[])
     mSplashScreen->showMessage(dbmgr->splashScreenText());
     a.processEvents(); //Sikre, at musen kan trykkes.
 
+    //Hvis den er åben, skal den sikre, at der er oprettet disse tabeller i DB.
+    QString qryGroupCreator =   "CREATE TABLE `tblPersoner` ("
+                                          "`id`	INTEGER PRIMARY KEY AUTOINCREMENT,"
+                                          "`navn`	TEXT"
+                                      ");";
+
+    QString qryPowerPause = "CREATE TABLE `powerpauses` ("
+                              "`id`	INTEGER PRIMARY KEY AUTOINCREMENT,"
+                              "`isActive`	INTEGER DEFAULT 1,"
+                               "`title`	TEXT,"
+                              "`helptext`	TEXT,"
+                              "`image`	BLOB);";
+
+    dbmgr->execMultibleList().append(qryGroupCreator);
+    dbmgr->execMultibleList().append(qryPowerPause);
+
+    mSplashScreen->showMessage("Opretter tabeller i database");
+
+    if(!dbmgr->execMultible()){
+        QMessageBox::critical(0,"Indlæsningsfejl ved tabeller",dbmgr->splashScreenText());
+        a.quit();
+        a.exit(EXIT_FAILURE);
+    }
+    mSplashScreen->showMessage("Alle tabeller oprettet!");
+
     mSplashScreen->show(); //Viser splash
 
 
+    QTimer::singleShot(1200,&w,SLOT(show())); //Sikre, at splashscreenen vises mindst 1200 ms
 
-    //QTimer::singleShot(1200,&w,SLOT(show())); //Sikre, at splashscreenen vises mindst 1200 ms
-
-    //mSplashScreen->finish(&w); //Når MainWindow er loaded, da lukkes splash automatisk.
+    mSplashScreen->finish(&w); //Når MainWindow er loaded, da lukkes splash automatisk.
 
     return a.exec();
 }

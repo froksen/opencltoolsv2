@@ -73,23 +73,23 @@ void DatabaseManager::setSelectedTable(QSqlTableModel *selectedTable)
 
 QStringList DatabaseManager::execMultibleList() const
 {
-    return _execMultible;
+    return _execMultibleList;
 }
 
 void DatabaseManager::setExecMultibleList(const QStringList &execMultibleList)
 {
-    _execMultible = execMultible;
+    _execMultibleList = execMultibleList;
 }
 
 bool DatabaseManager::execMultible()
 {
-    bool rlt = false;
-
     foreach(QString qry,execMultibleList()){
-        rlt = exec(qry);
+        if(!exec(qry)) {
+            setSplashScreenText(qry);
+            return false;
+        }
     }
-
-    return rlt;
+    return true;
 }
 
 
@@ -130,6 +130,7 @@ void DatabaseManager::refreshCurrentTable()
 
 bool DatabaseManager::exec(QString query)
 {
+    setSplashScreenText("Udfører database query...");
     QSqlQuery qry;
     if(!qry.exec(query)){
         qDebug() << "Failed to execute query:" << query << "Error:" << qry.lastError();
