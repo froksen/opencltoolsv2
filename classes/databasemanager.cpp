@@ -40,8 +40,9 @@ bool DatabaseManager::open()
     return true;
 }
 
-void DatabaseManager::closeAndRemoveDatabase(QString connectionName = "db.sqlite")
+void DatabaseManager::closeAndRemoveDatabase(QString connectionName)
 {
+    currentDatabase().close();
     QSqlDatabase::removeDatabase(connectionName);
 }
 

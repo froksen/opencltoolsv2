@@ -19,8 +19,7 @@ public:
     void setCurrentDatabaseFile(const QString &currentDatabaseFile);
 
     bool open();
-    void closeAndRemoveDatabase(QString connectionName);
-
+    void closeAndRemoveDatabase(QString connectionName="db.sqlite");
 
     QSqlDatabase currentDatabase() const;
     void setCurrentDatabase(const QSqlDatabase &currentDatabase);

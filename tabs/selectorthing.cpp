@@ -10,7 +10,6 @@
 #include <QPainter>
 #include <QMainWindow>
 #include "dialogs/thingselectoradmin.h"
-#include "classes/database.h"
 
 
 SelectorThing::SelectorThing(QWidget *parent) :
@@ -19,10 +18,7 @@ SelectorThing::SelectorThing(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    //Opsætter DB
-    setDatabasemanager(new DatabaseManager);
-    getDatabasemanager()->open();
-
+    //Tjekker standard Udfaldene.
     loadOutcomes();
 
     //Skyggeanimationen
@@ -45,6 +41,10 @@ void SelectorThing::resizeEvent(QResizeEvent *evt)
 
 void SelectorThing::loadOutcomes()
 {
+    //Opsætter DB
+    setDatabasemanager(new DatabaseManager);
+    getDatabasemanager()->open();
+
     //Vælger model
     QSqlTableModel *model = getDatabasemanager()->selectTable("startbythings"); //db->selectTable("startbythings","CREATE TABLE `startbythings` (`text` TEXT)");
 
@@ -95,6 +95,9 @@ void SelectorThing::loadOutcomes()
     //Sletter pointer
     model = NULL;
     delete model;
+
+    //Lukker databasen
+    getDatabasemanager()->closeAndRemoveDatabase();
 }
 
 QStringList SelectorThing::getOutcomes() const
