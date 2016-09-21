@@ -4,6 +4,7 @@
 #include <QWidget>
 #include "classes/randomnumber.h"
 #include "classes/animationshade.h"
+#include "classes/databasemanager.h"
 
 namespace Ui {
 class SelectorThing;
@@ -37,6 +38,10 @@ private:
     QStringList outcomes;
 
     AnimationShade *animationShade;
+
+    DatabaseManager *getDatabasemanager() const;
+    void setDatabasemanager(DatabaseManager *databasemanager);
+    DatabaseManager *_databasemanager;
 
 
 protected:

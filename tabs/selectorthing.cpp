@@ -18,6 +18,11 @@ SelectorThing::SelectorThing(QWidget *parent) :
     ui(new Ui::SelectorThing)
 {
     ui->setupUi(this);
+
+    //Opsætter DB
+    setDatabasemanager(new DatabaseManager);
+    getDatabasemanager()->open();
+
     loadOutcomes();
 
     //Skyggeanimationen
@@ -40,8 +45,8 @@ void SelectorThing::resizeEvent(QResizeEvent *evt)
 
 void SelectorThing::loadOutcomes()
 {
-    Database *db = new Database(this);
-    QSqlTableModel *model = db->selectTable("startbythings","CREATE TABLE `startbythings` (`text` TEXT)");
+    //Vælger model
+    QSqlTableModel *model = getDatabasemanager()->selectTable("startbythings"); //db->selectTable("startbythings","CREATE TABLE `startbythings` (`text` TEXT)");
 
     //Hvis der ikke er nogle værdier i tabellen, da udfyldes den med disse
     if(model->rowCount()<=0){
@@ -72,7 +77,7 @@ void SelectorThing::loadOutcomes()
 
         //Tilføjer standard sætningerne
         foreach(QString txt, defaultTexts){
-            db->execQry(QString("insert into startbythings values('%1')").arg(txt));
+            getDatabasemanager()->exec(QString("insert into startbythings values('%1')").arg(txt));
         }
 
         //Genindlæser modellen
@@ -134,6 +139,16 @@ void SelectorThing::fitTextToLabel()
     }
 
     ui->lblSelectedThing->setFont(font);
+}
+
+DatabaseManager *SelectorThing::getDatabasemanager() const
+{
+    return _databasemanager;
+}
+
+void SelectorThing::setDatabasemanager(DatabaseManager *databasemanager)
+{
+    _databasemanager = databasemanager;
 }
 
 void SelectorThing::on_btnNewOutcome_clicked()
