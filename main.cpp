@@ -65,6 +65,9 @@ int main(int argc, char *argv[])
     }
 
 
+    //Lukker DB
+    dbmgr->closeAndRemoveDatabase();
+
     mSplashScreen->showMessage("Alle tabeller oprettet!");
 
 

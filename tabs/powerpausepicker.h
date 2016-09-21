@@ -23,8 +23,6 @@ public:
 
 private slots:
     void on_btnAdminPowerPause_clicked();
-
-
     void on_btnNewPowerPause_clicked();
 
     void on_commandLinkButton_clicked();
