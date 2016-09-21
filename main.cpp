@@ -12,18 +12,19 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-
+    //STYLE
     //qDebug() << QStyleFactory::keys();
     //a.setStyle(QStyleFactory::create("WindowsVista"));
 
     //Hoved vinduet
     MainWindow w;
 
-
+    //Splashskærmen
     QSplashScreen *mSplashScreen = new QSplashScreen();
     mSplashScreen->setPixmap(QPixmap(":/img/fingerFive.png"));
     mSplashScreen->showMessage("Indlæser programmet");
     a.processEvents(); //Sikre, at musen kan trykkes.
+    mSplashScreen->show(); //Viser splash
 
     //DATABASE
     DatabaseManager *dbmgr = new DatabaseManager();
@@ -49,8 +50,11 @@ int main(int argc, char *argv[])
                               "`helptext`	TEXT,"
                               "`image`	BLOB);";
 
+    QString qrySelectorThing = "CREATE TABLE `startbythings` (`text` TEXT)";
+
     dbmgr->execMultibleList().append(qryGroupCreator);
     dbmgr->execMultibleList().append(qryPowerPause);
+    dbmgr->execMultibleList().append(qrySelectorThing);
 
     mSplashScreen->showMessage("Opretter tabeller i database");
 
@@ -61,11 +65,12 @@ int main(int argc, char *argv[])
     }
     mSplashScreen->showMessage("Alle tabeller oprettet!");
 
-    mSplashScreen->show(); //Viser splash
 
+    //Sætter dbmgr til MainWindow
+    w.setDatabaseManager(dbmgr);
 
+    //Viser GUI
     QTimer::singleShot(1200,&w,SLOT(show())); //Sikre, at splashscreenen vises mindst 1200 ms
-
     mSplashScreen->finish(&w); //Når MainWindow er loaded, da lukkes splash automatisk.
 
     return a.exec();

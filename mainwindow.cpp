@@ -91,3 +91,13 @@ void MainWindow::on_actionFuldsk_rm_Vindue_triggered()
     }
     setWindowState(Qt::WindowFullScreen);
 }
+
+DatabaseManager *MainWindow::databaseManager() const
+{
+    return _databaseManager;
+}
+
+void MainWindow::setDatabaseManager(DatabaseManager *databaseManager)
+{
+    _databaseManager = databaseManager;
+}

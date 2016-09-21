@@ -17,24 +17,12 @@ public:
     explicit PowerPauseAdmin(QWidget *parent = 0);
     ~PowerPauseAdmin();
 
-
-
-
-
-
-
 private slots:
-
     void on_pushButton_clicked();
-
     void on_btnEdit_clicked();
-
     void on_btnDelete_clicked();
-
     void on_btnNew_clicked();
-
     void on_tableView_entered(const QModelIndex &index);
-
     void on_tableView_doubleClicked(const QModelIndex &index);
 
 private:
