@@ -33,6 +33,11 @@ PowerPausePicker::~PowerPausePicker()
     delete ui;
 }
 
+void PowerPausePicker::setDatabaseManager(DatabaseManager *dbmgr)
+{
+
+}
+
 void PowerPausePicker::on_btnAdminPowerPause_clicked()
 {
     PowerPauseAdmin *ppa = new PowerPauseAdmin(this);

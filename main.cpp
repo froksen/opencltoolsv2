@@ -63,6 +63,8 @@ int main(int argc, char *argv[])
         a.quit();
         a.exit(EXIT_FAILURE);
     }
+
+
     mSplashScreen->showMessage("Alle tabeller oprettet!");
 
 

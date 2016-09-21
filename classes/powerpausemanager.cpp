@@ -189,3 +189,13 @@ QSqlTableModel *PowerPauseManager::getModel() const
 {
     return _model;
 }
+
+DatabaseManager *PowerPauseManager::getDatabaseMgr() const
+{
+    return _databaseMgr;
+}
+
+void PowerPauseManager::setDatabaseMgr(DatabaseManager *databaseMgr)
+{
+    _databaseMgr = databaseMgr;
+}

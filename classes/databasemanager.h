@@ -19,9 +19,11 @@ public:
     void setCurrentDatabaseFile(const QString &currentDatabaseFile);
 
     bool open();
+    void closeAndRemoveDatabase(QString connectionName);
+
+
     QSqlDatabase currentDatabase() const;
     void setCurrentDatabase(const QSqlDatabase &currentDatabase);
-
 
     QString splashScreenText() const;
 

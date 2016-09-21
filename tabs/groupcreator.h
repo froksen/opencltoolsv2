@@ -18,10 +18,6 @@ public:
     explicit GroupCreator(QWidget *parent = 0);
     ~GroupCreator();
 
-
-
-
-
 private slots:
     void on_addMemberButton_clicked();
     void on_removeMemberButton_clicked();
