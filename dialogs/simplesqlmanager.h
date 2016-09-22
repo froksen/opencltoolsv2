@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <QSqlTableModel>
-#include "classes/database.h"
+#include "classes/databasemanager.h"
 
 namespace Ui {
 class SimpleSqlManager;
@@ -23,6 +23,8 @@ public:
     int visibleColumn() const;
     void setVisibleColumn(int visibleColumn);
 
+
+
 private slots:
     void on_btnAdd_clicked();
     void on_cboExisting_editTextChanged(const QString &arg1);
@@ -39,12 +41,11 @@ private:
     void setModel(QSqlTableModel *model);
     QSqlTableModel *_model;
 
-    Database *database() const;
-    void setDatabase(Database *database);
-
     void reloadTable();
 
-    Database *_database;
+    DatabaseManager *databaseManager() const;
+    void setDatabaseManager(DatabaseManager *databaseManager);
+    DatabaseManager *_databaseManager;
 
     QString tableName() const;
     void setTableName(const QString &tableName);

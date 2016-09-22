@@ -14,15 +14,8 @@ SimpleSqlManager::SimpleSqlManager(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SimpleSqlManager)
 {
+    setupDatabase();
     ui->setupUi(this);
-
-//    Database *db = new Database(this);
-
-//    setModel(db->selectTable("startbythings"));
-//    model()->setTable("startbythings");
-//    model()->setEditStrategy(QSqlTableModel::OnRowChange);
-//    model()->select();
-    setDatabase(new Database());
 }
 
 SimpleSqlManager::~SimpleSqlManager()
@@ -32,19 +25,7 @@ SimpleSqlManager::~SimpleSqlManager()
 
 void SimpleSqlManager::setupDatabase()
 {
-    //Database
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("db.sqlite");
-
-    //Åbner DB
-    if(!db.open()){
-        qDebug() << "DB Open: Failed";
-        qDebug() << db.lastError().text();
-    }
-
-    //Lukker databasen igen
-    db.close();
-    QSqlDatabase::removeDatabase("db.sqlite");
+    setDatabaseManager(new DatabaseManager());
 }
 
 QSqlTableModel *SimpleSqlManager::model() const
@@ -57,27 +38,25 @@ void SimpleSqlManager::setModel(QSqlTableModel *model)
     _model = model;
 }
 
-Database *SimpleSqlManager::database() const
-{
-    return _database;
-}
-
-void SimpleSqlManager::setDatabase(Database *database)
-{
-    _database = database;
-
-
-}
 
 void SimpleSqlManager::reloadTable()
 {
-    model()->setTable(tableName());
-    model()->setEditStrategy(QSqlTableModel::OnRowChange);
-    model()->select();
+    QSqlTableModel *model = databaseManager()->selectTable(tableName());
+    model->setEditStrategy(QSqlTableModel::OnRowChange);
 
-    ui->cboExisting->setModel(model());
+    ui->cboExisting->setModel(model);
     ui->cboExisting->setModelColumn(visibleColumn());
     ui->cboExisting->setFocus();
+}
+
+DatabaseManager *SimpleSqlManager::databaseManager() const
+{
+    return _databaseManager;
+}
+
+void SimpleSqlManager::setDatabaseManager(DatabaseManager *databaseManager)
+{
+    _databaseManager = databaseManager;
 }
 
 QString SimpleSqlManager::tableName() const
@@ -103,7 +82,6 @@ void SimpleSqlManager::setVisibleColumn(int visibleColumn)
 void SimpleSqlManager::loadTable(QString tableName)
 {
     setTableName(tableName);
-    setModel(database()->selectTable(tableName));
     reloadTable();
 }
 
@@ -170,6 +148,8 @@ void SimpleSqlManager::on_cboExisting_currentTextChanged(const QString &arg1)
 
 void SimpleSqlManager::on_btnSaveClose_clicked()
 {
+        databaseManager()->closeAndRemoveDatabase();
+
         ui->cboExisting->model()->submit();
         this->close();
 }
