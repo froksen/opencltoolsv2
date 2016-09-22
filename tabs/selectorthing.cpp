@@ -112,6 +112,10 @@ void SelectorThing::appendOutcomes(const QString value)
 
 QString SelectorThing::getNewOutcome()
 {
+    if(getOutcomes().count()-1 <= 0){
+        return "For få indtastninger. Tilføj nogle flere :-)";
+    }
+
     rndNum.setLower(0);
     rndNum.setUpper(getOutcomes().count()-1);
     rndNum.setAllowSameOutcomeTwice(true);

@@ -21,8 +21,8 @@ int main(int argc, char *argv[])
 
     //Splashskærmen
     QSplashScreen *mSplashScreen = new QSplashScreen();
-    mSplashScreen->setPixmap(QPixmap(":/img/fingerFive.png"));
-    mSplashScreen->showMessage("Indlæser programmet");
+    mSplashScreen->setPixmap(QPixmap(":/img/logo.png"));
+    mSplashScreen->showMessage("Indlæser programmet",Qt::AlignLeft,Qt::white);
     a.processEvents(); //Sikre, at musen kan trykkes.
     mSplashScreen->show(); //Viser splash
 
@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
         a.quit();
         a.exit(EXIT_FAILURE);
     }
-    mSplashScreen->showMessage(dbmgr->splashScreenText());
+    mSplashScreen->showMessage(dbmgr->splashScreenText(),Qt::AlignLeft,Qt::white);
     a.processEvents(); //Sikre, at musen kan trykkes.
 
     //Hvis den er åben, skal den sikre, at der er oprettet disse tabeller i DB.
@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
     dbmgr->execMultibleList().append(qryPowerPause);
     dbmgr->execMultibleList().append(qrySelectorThing);
 
-    mSplashScreen->showMessage("Opretter tabeller i database");
+    mSplashScreen->showMessage("Opretter tabeller i database",Qt::AlignLeft,Qt::white);
 
     if(!dbmgr->execMultible()){
         QMessageBox::critical(0,"Indlæsningsfejl ved tabeller",dbmgr->splashScreenText());
@@ -68,14 +68,15 @@ int main(int argc, char *argv[])
     //Lukker DB
     dbmgr->closeAndRemoveDatabase();
 
-    mSplashScreen->showMessage("Alle tabeller oprettet!");
+    mSplashScreen->showMessage("Alle tabeller oprettet!",Qt::AlignLeft,Qt::white);
 
+    mSplashScreen->showMessage("Indlæser det sidste...",Qt::AlignLeft,Qt::white);
 
     //Sætter dbmgr til MainWindow
     w.setDatabaseManager(dbmgr);
 
     //Viser GUI
-    QTimer::singleShot(1200,&w,SLOT(show())); //Sikre, at splashscreenen vises mindst 1200 ms
+    QTimer::singleShot(1500,&w,SLOT(show())); //Sikre, at splashscreenen vises mindst 1200 ms
     mSplashScreen->finish(&w); //Når MainWindow er loaded, da lukkes splash automatisk.
 
     return a.exec();

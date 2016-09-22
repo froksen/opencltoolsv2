@@ -42,8 +42,9 @@ void RandomNumber::setLower(int value)
 {
     lower = value;
     qDebug() << "RandomNumber - Lower set to:" << value;
-    updateAvailableOutComes();
-}
+    if(isValid()){
+        updateAvailableOutComes();
+    }}
 
 int RandomNumber::getUpper() const
 {
@@ -54,7 +55,9 @@ void RandomNumber::setUpper(int value)
 {
     qDebug() << "RandomNumber - Upper set to:" << value;
     upper = value;
-    updateAvailableOutComes();
+    if(isValid()){
+        updateAvailableOutComes();
+    }
 }
 
 bool RandomNumber::allowSameOutcomeTwice()
@@ -69,11 +72,11 @@ void RandomNumber::setAllowSameOutcomeTwice(bool state)
 
 bool RandomNumber::isValid()
 {
-    if(getLower()>=getUpper()){
-        return false;
+    if(getLower()<getUpper()){
+        return true;
     }
 
-    return true;
+    return false;
 }
 
 int RandomNumber::getPreviousRandomValue() const
@@ -103,16 +106,15 @@ void RandomNumber::setAvailableOutComes(const QList<int> &availableOutComes)
 
 void RandomNumber::updateAvailableOutComes()
 {
+    QList<int> outcomes;
     //Sikre, at upper er større en lower
-    if(!isValid()){
-        return;
+    if(isValid()){
+        //Tilføjer de mulige udfald til listen
+        for(int i=getLower();i<=getUpper();i++){
+            outcomes.append(i);
+        }
     }
 
-    //Tilføjer de mulige udfald til listen
-    QList<int> outcomes;
-    for(int i=getLower();i<=getUpper();i++){
-        outcomes.append(i);
-    }
 
     qDebug() << outcomes;
     //Sætter de nye muligheder
