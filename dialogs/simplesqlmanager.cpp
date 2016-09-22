@@ -76,7 +76,7 @@ void SimpleSqlManager::reloadTable()
     model()->select();
 
     ui->cboExisting->setModel(model());
-    ui->cboExisting->setModelColumn(1);
+    ui->cboExisting->setModelColumn(visibleColumn());
     ui->cboExisting->setFocus();
 }
 
@@ -88,6 +88,16 @@ QString SimpleSqlManager::tableName() const
 void SimpleSqlManager::setTableName(const QString &tableName)
 {
     _tableName = tableName;
+}
+
+int SimpleSqlManager::visibleColumn() const
+{
+    return _visibleColumn;
+}
+
+void SimpleSqlManager::setVisibleColumn(int visibleColumn)
+{
+    _visibleColumn = visibleColumn;
 }
 
 void SimpleSqlManager::loadTable(QString tableName)

@@ -9,7 +9,7 @@
 #include <QFontMetrics>
 #include <QPainter>
 #include <QMainWindow>
-#include "dialogs/thingselectoradmin.h"
+#include "dialogs/simplesqlmanager.h"
 
 
 SelectorThing::SelectorThing(QWidget *parent) :
@@ -165,7 +165,10 @@ void SelectorThing::on_btnNewOutcome_clicked()
 
 void SelectorThing::on_btnManageOptions_clicked()
 {
-    ThingSelectorAdmin dialog;
+    SimpleSqlManager dialog;
+    dialog.loadTable("startbythings");
+    dialog.setDataType("Sætning");
+    dialog.setVisibleColumn(0);
     dialog.exec();
 
     //Genindlæser værdierne

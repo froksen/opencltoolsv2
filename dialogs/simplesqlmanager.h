@@ -20,7 +20,8 @@ public:
     void loadTable(QString tableName);
     void setDataType(QString text);
 
-
+    int visibleColumn() const;
+    void setVisibleColumn(int visibleColumn);
 
 private slots:
     void on_btnAdd_clicked();
@@ -48,6 +49,8 @@ private:
     QString tableName() const;
     void setTableName(const QString &tableName);
     QString _tableName;
+
+    int _visibleColumn = 0;
 
 };
 
