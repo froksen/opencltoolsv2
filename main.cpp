@@ -75,9 +75,12 @@ int main(int argc, char *argv[])
     //Sætter dbmgr til MainWindow
     w.setDatabaseManager(dbmgr);
 
+    //mSplashScreen->finish(&w); //Når MainWindow er loaded, da lukkes splash automatisk.
+
     //Viser GUI
-    QTimer::singleShot(1500,&w,SLOT(show())); //Sikre, at splashscreenen vises mindst 1200 ms
-    mSplashScreen->finish(&w); //Når MainWindow er loaded, da lukkes splash automatisk.
+    mSplashScreen->finish(&w);
+    w.show();
+    //QTimer::singleShot(1200,mSplashScreen,SLOT(close())); //Sikre, at splashscreenen vises mindst 1200 ms
 
     return a.exec();
 }
