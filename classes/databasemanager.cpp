@@ -42,8 +42,10 @@ bool DatabaseManager::open()
 
 void DatabaseManager::closeAndRemoveDatabase(QString connectionName)
 {
-    currentDatabase().close();
-    QSqlDatabase::removeDatabase(connectionName);
+    {
+        currentDatabase().close();
+    }
+    QSqlDatabase::removeDatabase(currentDatabase().connectionName());
 }
 
 QSqlDatabase DatabaseManager::currentDatabase() const

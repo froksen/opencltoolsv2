@@ -26,6 +26,7 @@ SimpleSqlManager::~SimpleSqlManager()
 void SimpleSqlManager::setupDatabase()
 {
     setDatabaseManager(new DatabaseManager());
+    databaseManager()->open();
 }
 
 QSqlTableModel *SimpleSqlManager::model() const
@@ -41,10 +42,10 @@ void SimpleSqlManager::setModel(QSqlTableModel *model)
 
 void SimpleSqlManager::reloadTable()
 {
-    QSqlTableModel *model = databaseManager()->selectTable(tableName());
-    model->setEditStrategy(QSqlTableModel::OnRowChange);
+    setModel(databaseManager()->selectTable(tableName()));
+    model()->setEditStrategy(QSqlTableModel::OnRowChange);
 
-    ui->cboExisting->setModel(model);
+    ui->cboExisting->setModel(model());
     ui->cboExisting->setModelColumn(visibleColumn());
     ui->cboExisting->setFocus();
 }
