@@ -23,7 +23,7 @@ bool DatabaseManager::open()
 {
     //Hvis der ikke er lavet en instence, da lav den
     if(!currentDatabase().isOpen()){
-        QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+        QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //QSqlDatabase::addDatabase("QSQLITE");
         db.setDatabaseName("db.sqlite");
         setCurrentDatabase(db);
     }
@@ -42,10 +42,8 @@ bool DatabaseManager::open()
 
 void DatabaseManager::closeAndRemoveDatabase(QString connectionName)
 {
-    {
-        currentDatabase().close();
-    }
-    QSqlDatabase::removeDatabase(currentDatabase().connectionName());
+    currentDatabase().close();
+    qDebug() << "DB NAME" <<currentDatabase().connectionNames();
 }
 
 QSqlDatabase DatabaseManager::currentDatabase() const

@@ -16,8 +16,6 @@ int main(int argc, char *argv[])
     //qDebug() << QStyleFactory::keys();
     //a.setStyle(QStyleFactory::create("WindowsVista"));
 
-    //Hoved vinduet
-    MainWindow w;
 
     //Splashskærmen
     QSplashScreen *mSplashScreen = new QSplashScreen();
@@ -54,7 +52,8 @@ int main(int argc, char *argv[])
 
     dbmgr->execMultibleList().append(qryGroupCreator);
     dbmgr->execMultibleList().append(qryPowerPause);
-    dbmgr->execMultibleList().append(qrySelectorThing);
+    //dbmgr->execMultibleList().append(qrySelectorThing);
+    dbmgr->exec(qrySelectorThing);
 
     mSplashScreen->showMessage("Opretter tabeller i database",Qt::AlignLeft,Qt::white);
 
@@ -70,16 +69,18 @@ int main(int argc, char *argv[])
 
     mSplashScreen->showMessage("Alle tabeller oprettet!",Qt::AlignLeft,Qt::white);
 
-    mSplashScreen->showMessage("Indlæser det sidste...",Qt::AlignLeft,Qt::white);
+    mSplashScreen->showMessage("Indlæser...",Qt::AlignLeft,Qt::white);
+
+    //Hoved vinduet
+    MainWindow w;
 
     //Sætter dbmgr til MainWindow
-    w.setDatabaseManager(dbmgr);
-
-    //mSplashScreen->finish(&w); //Når MainWindow er loaded, da lukkes splash automatisk.
+    //w.setDatabaseManager(dbmgr);
 
     //Viser GUI
-    mSplashScreen->finish(&w);
     w.show();
+    mSplashScreen->finish(&w);
+
     //QTimer::singleShot(1200,mSplashScreen,SLOT(close())); //Sikre, at splashscreenen vises mindst 1200 ms
 
     return a.exec();

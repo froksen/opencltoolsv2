@@ -116,11 +116,12 @@ QString SelectorThing::getNewOutcome()
         return "For få indtastninger. Tilføj nogle flere :-)";
     }
 
-    rndNum.setLower(0);
     rndNum.setUpper(getOutcomes().count()-1);
-    rndNum.setAllowSameOutcomeTwice(true);
+    rndNum.setLower(0);
+    rndNum.setAllowSameOutcomeTwice(false);
 
-    return getOutcomes().at(rndNum.getRandomValue());
+    //return getOutcomes().at(rndNum.getRandomValue());
+    return "";
 }
 
 void SelectorThing::fitTextToLabel()

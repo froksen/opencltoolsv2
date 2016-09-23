@@ -19,15 +19,22 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    qDebug() << "Nedtællingsur";
     ui->tabWidget->addTab(new CountDownTimer,"Nedtællingsur");
+    qDebug() << "Tilfældigt tal";
     ui->tabWidget->addTab(new SelectorRandomValue,"Tilfældigt tal");
+    qDebug() << "Vælger (Hånd)";
     ui->tabWidget->addTab(new SelectorFinger,"Vælger (Hånd)");
+    qDebug() << "Vælger (Ting)";
     ui->tabWidget->addTab(new SelectorThing,"Vælger (Ting)");
+    qDebug() << "Vælger (Tal)";
     ui->tabWidget->addTab(new SpinBoard,"Vælger (Tal)");
+    qDebug() << "PowerPause vælger";
     ui->tabWidget->addTab(new PowerPausePicker,"PowerPause vælger");
+    qDebug() << "Gruppeskaber";
     ui->tabWidget->addTab(new GroupCreator,"Gruppeskaber");
     ui->tabWidget->addTab(new OrderChooser,"Gl. Gruppeskaber");
-    //ui->tabWidget->addTab(new TeamPlate,"CL: Teamplade");
+//    //ui->tabWidget->addTab(new TeamPlate,"CL: Teamplade");
     ui->tabWidget->setCurrentIndex(0);
 
 
