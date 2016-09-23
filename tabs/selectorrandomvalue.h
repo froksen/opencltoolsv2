@@ -39,6 +39,8 @@ private:
     int randomNumberFrom;
     int randomNumberTo;
 
+    QStringList previousNumbers;
+
     RandomNumber rnd;
 
     AnimationShade *animationShade;

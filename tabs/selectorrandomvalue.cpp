@@ -65,13 +65,27 @@ int SelectorRandomValue::getRandomNumberTo() const
 void SelectorRandomValue::setRandomNumberTo(int value)
 {
     randomNumberTo = value;
-        rnd.setUpper(getRandomNumberTo());
+    rnd.setUpper(getRandomNumberTo());
 }
 
 void SelectorRandomValue::pickRandomNumber()
 {
 
     ui->lblNumber->setText(QString::number(rnd.getRandomValue()));
+
+    previousNumbers.append(ui->lblNumber->text());
+
+    if(previousNumbers.count()>15){
+        previousNumbers.removeFirst();
+    }
+
+    QString preTx = "";
+    foreach(QString txt, previousNumbers){
+        preTx.append(txt).append(" ");
+    }
+
+    ui->previousNumbers->setText(preTx);
+
 }
 
 void SelectorRandomValue::on_sbNumberTo_valueChanged(int arg1)
