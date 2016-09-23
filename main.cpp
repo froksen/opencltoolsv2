@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
-//#include <QStyleFactory>
-//#include <QDebug>
+#include <QStyleFactory>
+#include <QDebug>
 #include <QSplashScreen>
 #include <QPixmap>
 #include <QTimer>
@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 
     //STYLE
     //qDebug() << QStyleFactory::keys();
-    //a.setStyle(QStyleFactory::create("WindowsVista"));
+    //a.setStyle(QStyleFactory::create("Windows"));
 
 
     //Splashskærmen

@@ -17,6 +17,43 @@
    <iconset resource="resource.qrc">
     <normaloff>:/icon.ico</normaloff>:/icon.ico</iconset>
   </property>
+  <property name="styleSheet">
+   <string notr="true">#MainWindow{
+	background: rgb(255, 255, 255)
+}
+
+#tabWidget{
+	border: none;
+}
+
+QTabWidget::pane { /* The tab widget frame */
+border-top: rgb(255, 255, 255)
+}
+
+QTabBar::tab:selected, QTabBar::tab:hover {
+/*background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #fafafa, stop: 0.4 #f4f4f4, stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);*/
+background: rgb(112, 146, 190);
+height: 25px;
+width: 110%;
+}
+QTabBar::tab:selected {
+border-color: #9B9B9B;
+border-bottom-color: #C2C7CB; /* same as pane color */
+color: white;
+
+}
+QTabBar::tab:!selected {
+height: 2px;
+width: 100%;
+}
+
+QPushButton:hover{
+	height: 20px;
+	background: rgb(112, 146, 190);
+	color: white;
+
+}</string>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
