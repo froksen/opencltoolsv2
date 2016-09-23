@@ -175,11 +175,11 @@ void SelectorThing::on_btnNewOutcome_clicked()
 
 void SelectorThing::on_btnManageOptions_clicked()
 {
-    SimpleSqlManager dialog;
-    dialog.loadTable("startbythings");
-    dialog.setDataType("Sætning");
-    dialog.setVisibleColumn(0);
-    dialog.exec();
+    SimpleSqlManager *dialog = new SimpleSqlManager(this);
+    dialog->loadTable("startbythings");
+    dialog->setDataType("Sætning");
+    dialog->setVisibleColumn(0);
+    dialog->exec();
 
     //Genindlæser værdierne
     loadOutcomes();
