@@ -54,6 +54,8 @@ int SelectorRandomValue::getRandomNumberFrom() const
 void SelectorRandomValue::setRandomNumberFrom(int value)
 {
     randomNumberFrom = value;
+    previousNumbers.clear();
+    ui->previousNumbers->setText("");
     rnd.setLower(getRandomNumberFrom());
 }
 
@@ -65,6 +67,8 @@ int SelectorRandomValue::getRandomNumberTo() const
 void SelectorRandomValue::setRandomNumberTo(int value)
 {
     randomNumberTo = value;
+    previousNumbers.clear();
+    ui->previousNumbers->setText("");
     rnd.setUpper(getRandomNumberTo());
 }
 
