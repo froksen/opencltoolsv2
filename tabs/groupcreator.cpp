@@ -578,11 +578,13 @@ void GroupCreator::on_gotoSelectMembersPage_clicked()
 }
 
 void GroupCreator::on_adminPersonsButton_clicked()
-{
-    SimpleSqlManager *man = new SimpleSqlManager(this);
-    man->loadTable("tblPersoner");
-    man->setDataType("Personer");
-    man->exec();
+{   
+    SimpleSqlManager dialog;
+    dialog.setVisibleColumn(1);
+    dialog.loadTable("tblPersoner");
+    dialog.loadTable("tblPersoner");
+    dialog.setDataType("Personer");
+    dialog.exec();
 
 
     ui->availableMembers->setModel(database()->refreshTable());

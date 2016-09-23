@@ -78,10 +78,10 @@ int main(int argc, char *argv[])
     //w.setDatabaseManager(dbmgr);
 
     //Viser GUI
-    w.show();
     mSplashScreen->finish(&w);
+    w.show();
 
-    //QTimer::singleShot(1200,mSplashScreen,SLOT(close())); //Sikre, at splashscreenen vises mindst 1200 ms
+    //QTimer::singleShot(2200,&w,SLOT(show())); //Sikre, at splashscreenen vises mindst 1200 ms
 
     return a.exec();
 }

@@ -42,11 +42,15 @@ void SimpleSqlManager::setModel(QSqlTableModel *model)
 
 void SimpleSqlManager::reloadTable()
 {
+    if(!databaseManager()->currentDatabase().isOpen()){
+        setupDatabase();
+    }
     setModel(databaseManager()->selectTable(tableName()));
     model()->setEditStrategy(QSqlTableModel::OnRowChange);
 
-    ui->cboExisting->setModel(model());
     ui->cboExisting->setModelColumn(visibleColumn());
+    ui->cboExisting->setModel(model());
+
     ui->cboExisting->setFocus();
 }
 
@@ -103,7 +107,8 @@ void SimpleSqlManager::on_btnAdd_clicked()
     }
 
     QSqlRecord record = model()->record();
-    record.setValue(ui->cboExisting->modelColumn(),newText);
+    //record.setValue();
+    record.setValue(visibleColumn(),newText);
     model()->insertRecord(-1,record);
     model()->submitAll();
     reloadTable();
