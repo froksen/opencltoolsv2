@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>481</width>
-    <height>378</height>
+    <width>597</width>
+    <height>408</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabSelectMembers">
       <attribute name="title">
@@ -26,13 +26,6 @@
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_3">
-         <item>
-          <widget class="QPushButton" name="adminPersonsButton">
-           <property name="text">
-            <string>Administer personer</string>
-           </property>
-          </widget>
-         </item>
          <item>
           <widget class="QLabel" name="label">
            <property name="font">
@@ -57,18 +50,12 @@
        </item>
        <item>
         <layout class="QGridLayout" name="gridLayout">
-         <item row="0" column="4">
-          <spacer name="horizontalSpacer_5">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+         <item row="0" column="5">
+          <widget class="QPushButton" name="adminPersonsButton">
+           <property name="text">
+            <string>Administer personer</string>
            </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
+          </widget>
          </item>
          <item row="0" column="0">
           <spacer name="horizontalSpacer">
@@ -84,6 +71,39 @@
           </spacer>
          </item>
          <item row="0" column="6">
+          <spacer name="horizontalSpacer_5">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="0" column="10">
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="0" column="2">
+          <widget class="QPushButton" name="addMemberButton">
+           <property name="text">
+            <string>Tilvælg</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="8">
           <widget class="QPushButton" name="removeAllMemberButton">
            <property name="text">
             <string>Fravælg alle</string>
@@ -97,15 +117,15 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="2">
-          <widget class="QPushButton" name="addMemberButton">
+         <item row="0" column="7">
+          <widget class="QPushButton" name="addAllMemberButton">
            <property name="text">
-            <string>Tilvælg</string>
+            <string>Tilvælg alle</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="8">
-          <spacer name="horizontalSpacer_2">
+         <item row="0" column="4">
+          <spacer name="horizontalSpacer_6">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -116,13 +136,6 @@
             </size>
            </property>
           </spacer>
-         </item>
-         <item row="0" column="5">
-          <widget class="QPushButton" name="addAllMemberButton">
-           <property name="text">
-            <string>Tilvælg alle</string>
-           </property>
-          </widget>
          </item>
         </layout>
        </item>
