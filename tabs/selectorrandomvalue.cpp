@@ -10,10 +10,12 @@ SelectorRandomValue::SelectorRandomValue(QWidget *parent) :
     ui->setupUi(this);
 
 
-    setRandomNumberFrom(0);
-    setRandomNumberTo(10);
+//    setRandomNumberFrom(0);
+//    setRandomNumberTo(10);
     ui->sbNumberFrom->setValue(0);
     ui->sbNumberTo->setValue(10);
+    on_sbNumberFrom_valueChanged(0);
+    on_sbNumberTo_valueChanged(10);
 
     QString style = "QSpinBox::up-button { width: 32px; }"
                     "QSpinBox::down-button { width: 32px; }";
