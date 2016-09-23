@@ -30,6 +30,7 @@ private:
 
     QStringList getOutcomes() const;
     void appendOutcomes(const QString value);
+    void setOutcomes(QStringList list);
     QString getNewOutcome();
 
     void fitTextToLabel();

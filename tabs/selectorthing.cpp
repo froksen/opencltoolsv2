@@ -85,7 +85,8 @@ void SelectorThing::loadOutcomes()
     }
 
     //Sletter evt. gamle
-    getOutcomes().clear();
+    QStringList list;
+    setOutcomes(list);
 
     //Tilføjer nye værdier
     for(int i=0;i<model->rowCount();i++){
@@ -110,6 +111,11 @@ void SelectorThing::appendOutcomes(const QString value)
     outcomes.append(value);
 }
 
+void SelectorThing::setOutcomes(QStringList list)
+{
+    outcomes = list;
+}
+
 QString SelectorThing::getNewOutcome()
 {
     if(getOutcomes().count()-1 <= 0){
@@ -120,8 +126,7 @@ QString SelectorThing::getNewOutcome()
     rndNum.setLower(0);
     rndNum.setAllowSameOutcomeTwice(false);
 
-    //return getOutcomes().at(rndNum.getRandomValue());
-    return "";
+    return getOutcomes().at(rndNum.getRandomValue());
 }
 
 void SelectorThing::fitTextToLabel()
