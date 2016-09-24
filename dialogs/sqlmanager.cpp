@@ -75,8 +75,9 @@ void SqlManager::on_addButton_clicked()
     QSqlRecord record = model()->record();
     model()->insertRecord(-1,record);
     model()->submitAll();
-
     model()->select();
+    ui->tableView->scrollToBottom();
+
 }
 
 void SqlManager::on_removeButton_clicked()

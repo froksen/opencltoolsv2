@@ -22,5 +22,6 @@
         <file>sounds/of.mp3</file>
         <file>img/CL_Teamplade.png</file>
         <file>img/logo.png</file>
+        <file>img/512px-Copy_font_awesome.png</file>
     </qresource>
 </RCC>

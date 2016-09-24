@@ -17,7 +17,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabSelectMembers">
       <attribute name="title">
@@ -45,6 +45,9 @@
             <set>QAbstractItemView::NoEditTriggers</set>
            </property>
            <property name="alternatingRowColors">
+            <bool>true</bool>
+           </property>
+           <property name="sortingEnabled">
             <bool>true</bool>
            </property>
           </widget>
@@ -165,6 +168,9 @@
            <property name="alternatingRowColors">
             <bool>true</bool>
            </property>
+           <property name="sortingEnabled">
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
         </layout>
@@ -275,6 +281,9 @@
               <property name="text">
                <string>Brug holdbetegnelse i liste</string>
               </property>
+              <property name="tristate">
+               <bool>false</bool>
+              </property>
              </widget>
             </item>
            </layout>
@@ -297,7 +306,7 @@
             <item row="0" column="1">
              <widget class="QPushButton" name="mixGroups">
               <property name="text">
-               <string>--&gt; Bland medlemmerne &lt;--</string>
+               <string>Bland medlemmerne</string>
               </property>
              </widget>
             </item>
@@ -320,21 +329,57 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="copyToClipboard">
-         <property name="text">
-          <string>Kopirer hele tabellen til klippebordet</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QTableWidget" name="groupsOverview">
-         <property name="editTriggers">
-          <set>QAbstractItemView::NoEditTriggers</set>
-         </property>
-         <property name="alternatingRowColors">
-          <bool>true</bool>
-         </property>
-        </widget>
+        <layout class="QGridLayout" name="gridLayout_5">
+         <item row="0" column="0">
+          <widget class="QPushButton" name="copyToClipboard">
+           <property name="toolTip">
+            <string>Kopirer informationerne i tabellen til klippebordet. Så du kan indsætte det i f.eks. Excel.</string>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../resource.qrc">
+             <normaloff>:/img/512px-Copy_font_awesome.png</normaloff>:/img/512px-Copy_font_awesome.png</iconset>
+           </property>
+           <property name="default">
+            <bool>false</bool>
+           </property>
+           <property name="flat">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="0" column="1" rowspan="2">
+          <widget class="QTableWidget" name="groupsOverview">
+           <property name="editTriggers">
+            <set>QAbstractItemView::NoEditTriggers</set>
+           </property>
+           <property name="alternatingRowColors">
+            <bool>true</bool>
+           </property>
+           <property name="sortingEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
        <item>
         <widget class="QPushButton" name="gotoSelectMembersPage">
@@ -349,6 +394,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resource.qrc"/>
+ </resources>
  <connections/>
 </ui>

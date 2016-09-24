@@ -42,6 +42,7 @@ GroupCreator::GroupCreator(QWidget *parent) :
 
     ui->groupsOverview->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
 
+
 }
 
 GroupCreator::~GroupCreator()
@@ -275,6 +276,8 @@ void GroupCreator::createGroups()
     }
 
     //ui->groupsOverview->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->groupsOverview->resizeColumnsToContents();
+
 }
 
 void GroupCreator::calulateGroupSizeOptions()
@@ -633,4 +636,9 @@ void GroupCreator::on_copyToClipboard_clicked()
     copyToClipboard();
     ui->groupsOverview->clearSelection();
     QMessageBox::information(this,"Kopiret","Tabellen er nu kopieret, indsæt nu teksten i Excel");
+}
+
+void GroupCreator::on_useTeamNameInList_clicked()
+{
+    on_mixGroups_clicked();
 }

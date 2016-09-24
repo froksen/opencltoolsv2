@@ -33,6 +33,8 @@ private slots:
     void on_adminPersonsButton_clicked();
     void on_copyToClipboard_clicked();
 
+    void on_useTeamNameInList_clicked();
+
 private:
     Ui::GroupCreator *ui;
 
