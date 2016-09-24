@@ -25,6 +25,8 @@ GroupCreator::GroupCreator(QWidget *parent) :
     updateAvailableMemebersTable();
     setSelectedMembers(new QStandardItemModel);
 
+    ui->availableMembers->setModel(new QStandardItemModel(this));
+
     //calulateGroupSizeOptions();
 
 
@@ -63,11 +65,19 @@ QStandardItemModel *GroupCreator::selectedMembers() const
 void GroupCreator::setSelectedMembers(QStandardItemModel *selectedMembers)
 {
     _selectedMembers = selectedMembers;
+
+    selectedMembers->setColumnCount(ui->availableMembers->model()->columnCount());
+
+    for(int i=0;i<ui->availableMembers->model()->columnCount();i++){
+        selectedMembers->setHorizontalHeaderItem(i,new QStandardItem(ui->availableMembers->model()->headerData(i,Qt::Horizontal,Qt::DisplayRole).toString()));
+    }
+
     ui->selectedMembers->setModel(selectedMembers);
     ui->selectedMembers->setSelectionBehavior(QAbstractItemView::SelectRows);
 
-    selectedMembers->setHorizontalHeaderItem(0, new QStandardItem("Id"));
-    selectedMembers->setHorizontalHeaderItem(1, new QStandardItem("Navn"));
+
+//    selectedMembers->setHorizontalHeaderItem(0, new QStandardItem("Id"));
+//    selectedMembers->setHorizontalHeaderItem(1, new QStandardItem("Navn"));
 
     ui->selectedMembers->hideColumn(0);
 }
@@ -410,6 +420,7 @@ void GroupCreator::updateAvailableMemebersTable()
 //    ui->availableMembers->model()->set->setHorizontalHeaderItem(0, new QStandardItem("Id"));
 //    selectedMembers->setHorizontalHeaderItem(1, new QStandardItem("Navn"));
 
+    //selectedMembers skal have de samme kolonner, som SQL-modellen
     ui->selectedMembers->hideColumn(0);
 }
 
