@@ -35,37 +35,40 @@ int main(int argc, char *argv[])
     mSplashScreen->showMessage(dbmgr->splashScreenText(),Qt::AlignLeft,Qt::white);
     a.processEvents(); //Sikre, at musen kan trykkes.
 
-    //Hvis den er åben, skal den sikre, at der er oprettet disse tabeller i DB.
-    QString qryGroupCreator =   "CREATE TABLE `tblPersoner` ("
-                                          "`id`	INTEGER PRIMARY KEY AUTOINCREMENT,"
-                                          "`navn`	TEXT"
-                                      ");";
-
-    QString qryPowerPause = "CREATE TABLE `powerpauses` ("
-                              "`id`	INTEGER PRIMARY KEY AUTOINCREMENT,"
-                              "`isActive`	INTEGER DEFAULT 1,"
-                               "`title`	TEXT,"
-                              "`helptext`	TEXT,"
-                              "`image`	BLOB);";
-
-    QString qrySelectorThing = "CREATE TABLE `startbythings` (`text` TEXT)";
-
-    dbmgr->execMultibleList().append(qryGroupCreator);
-    dbmgr->execMultibleList().append(qryPowerPause);
-    //dbmgr->execMultibleList().append(qrySelectorThing);
-    dbmgr->exec(qrySelectorThing);
-
+    /* DATABASE QUERIES */
+    //Udfører Queries. - Lavet lidt dumt. Det er SQLDatabasen der sikre, at der ikke sker fejl :S
     mSplashScreen->showMessage("Opretter tabeller i database",Qt::AlignLeft,Qt::white);
 
-    if(!dbmgr->execMultible()){
-        QMessageBox::critical(0,"Indlæsningsfejl ved tabeller",dbmgr->splashScreenText());
-        a.quit();
-        a.exit(EXIT_FAILURE);
-    }
+    qDebug() << "*  OPSTART SQL QUERIES *";
+    qDebug() << " - Bemærk: Hvis de fejler, kan det skyldes, at alt er i orden!";
+    //Tilføjer nye
+    dbmgr->exec("CREATE TABLE `tblPersoner` (`id`	INTEGER PRIMARY KEY AUTOINCREMENT);");
+
+    dbmgr->exec("CREATE TABLE `powerpauses` (`id`   INTEGER PRIMARY KEY AUTOINCREMENT);");
+
+    dbmgr->exec("CREATE TABLE `startbythings` (`text` TEXT)");
+
+
+    //Opdaterer ekisterende
+    //tblPersoner
+    dbmgr->exec("ALTER TABLE tblPersoner ADD COLUMN id INTEGER PRIMARY KEY AUTOINCREMENT;");
+    dbmgr->exec("ALTER TABLE tblPersoner ADD COLUMN hold TEXT;");
+    dbmgr->exec("ALTER TABLE tblPersoner ADD COLUMN navn TEXT;");
+
+    //startbythings
+    dbmgr->exec("ALTER TABLE startbythings ADD COLUMN text TEXT;");
+
+    //PowerPause
+    dbmgr->exec("ALTER TABLE powerpauses ADD COLUMN id INTEGER PRIMARY KEY AUTOINCREMENT;");
+    dbmgr->exec("ALTER TABLE powerpauses ADD COLUMN isActive INTEGER DEFAULT 1;");
+    dbmgr->exec("ALTER TABLE powerpauses ADD COLUMN title TEXT;");
+    dbmgr->exec("ALTER TABLE powerpauses ADD COLUMN helptext TEXT;");
+    dbmgr->exec("ALTER TABLE powerpauses ADD COLUMN image BLOB;");
 
 
     //Lukker DB
     dbmgr->closeAndRemoveDatabase();
+    qDebug() << "*  OPSTART SQL QUERIES SLUT!*";
 
     mSplashScreen->showMessage("Alle tabeller oprettet!",Qt::AlignLeft,Qt::white);
 

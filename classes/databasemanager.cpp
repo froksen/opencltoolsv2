@@ -139,7 +139,7 @@ bool DatabaseManager::exec(QString query)
     setSplashScreenText("Udfører database query...");
     QSqlQuery qry;
     if(!qry.exec(query)){
-        qDebug() << "Failed to execute query:" << query << "Error:" << qry.lastError();
+        qDebug() << "Failed to execute query:" << query << "Error:" << qry.lastError().text();
         return false;
     }
 
