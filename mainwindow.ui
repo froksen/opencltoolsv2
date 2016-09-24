@@ -18,7 +18,7 @@
     <normaloff>:/icon.ico</normaloff>:/icon.ico</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true">#MainWindow{
+   <string notr="true">#MainWindow, QDialog{
 	background: rgb(255, 255, 255)
 }
 
@@ -47,20 +47,12 @@ width: 125px;
 height: 2px;
 }
 
-QPushButton:hover{
+/*QPushButton:hover{
 	height: 20px;
 	background: rgb(112, 146, 190);
 	color: white;
-}
+}*/
 
-QComboBox{
-	color:  black;
-}
-
-QComboBox:hover, QComboBox:on {
-background: rgb(112, 146, 190);
-color: white;
-}
 
 QTableView::item:section 
 {
@@ -71,6 +63,16 @@ QTableView::item:section
 QTableView::item:!section 
 {
 	color: black;
+}
+
+QComboBox
+{
+height: 25px;
+}
+
+QComboBox::item
+{
+height: 25px;
 }</string>
   </property>
   <widget class="QWidget" name="centralWidget">

@@ -99,7 +99,7 @@ void SimpleSqlManager::on_btnAdd_clicked()
 {
     bool ok;
     QString newText = QInputDialog::getText(this, tr("Indtast ny"),
-                                            tr("NY:"), QLineEdit::Normal,
+                                            tr("Ny:"), QLineEdit::Normal,
                                             "<Skriv her>", &ok);
 
     if(!ok && newText.isEmpty()){
@@ -165,7 +165,7 @@ void SimpleSqlManager::on_btnEdit_clicked()
     bool ok;
     QString oldText = ui->cboExisting->currentText();
     QString text = QInputDialog::getText(this, tr("Ændringer"),
-                                            tr("OPDATER:"), QLineEdit::Normal,
+                                            tr("Rediger:"), QLineEdit::Normal,
                                             oldText, &ok);
 
     if(ok && !text.isEmpty()){
