@@ -4,7 +4,7 @@
 #include <QStandardItem>
 #include <QDebug>
 #include "classes/randomnumber.h"
-#include "dialogs/simplesqlmanager.h"
+#include "dialogs/sqlmanager.h"
 #include <QTableWidgetItem>
 #include <QClipboard>
 #include <QKeySequence>
@@ -24,8 +24,6 @@ GroupCreator::GroupCreator(QWidget *parent) :
     //Opdaterer tabellen
     updateAvailableMemebersTable();
     setSelectedMembers(new QStandardItemModel);
-
-    ui->availableMembers->setModel(new QStandardItemModel(this));
 
     //calulateGroupSizeOptions();
 
@@ -588,13 +586,17 @@ void GroupCreator::on_gotoSelectMembersPage_clicked()
 
 void GroupCreator::on_adminPersonsButton_clicked()
 {   
-    SimpleSqlManager *dialog = new SimpleSqlManager(this);
-    dialog->setVisibleColumn(1);
-    dialog->loadTable("tblPersoner");
-    dialog->loadTable("tblPersoner");
-    dialog->setDataType("Personer");
-    dialog->exec();
+//    SimpleSqlManager *dialog = new SimpleSqlManager(this);
+//    dialog->setVisibleColumn(1);
+//    dialog->loadTable("tblPersoner");
+//    dialog->loadTable("tblPersoner");
+//    dialog->setDataType("Personer");
+//    dialog->exec();
 
+    SqlManager *dialog = new SqlManager(this);
+    dialog->setHiddenColumnNames(QStringList() << "id");
+    dialog->loadData("tblPersoner");
+    dialog->exec();
 
     ui->availableMembers->setModel(database()->refreshTable());
     ui->availableMembers->setSelectionBehavior(QAbstractItemView::SelectRows);

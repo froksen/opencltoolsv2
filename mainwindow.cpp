@@ -35,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tabWidget->addTab(new GroupCreator,"Gruppeskaber");
     //ui->tabWidget->addTab(new OrderChooser,"Gl. Gruppeskaber");
 //    //ui->tabWidget->addTab(new TeamPlate,"CL: Teamplade");
-    ui->tabWidget->setCurrentIndex(0);
+    ui->tabWidget->setCurrentIndex(6);
 
 
     ui->mainToolBar->setHidden(true);
