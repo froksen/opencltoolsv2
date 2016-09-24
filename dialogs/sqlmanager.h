@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "classes/databasemanager.h"
+#include <QSqlTableModel>
 
 namespace Ui {
 class SqlManager;
@@ -20,10 +21,16 @@ public:
     QStringList hiddenColumnNames() const;
     void setHiddenColumnNames(const QStringList &names);
 
+
+
+
+
 private slots:
     void on_addButton_clicked();
 
     void on_removeButton_clicked();
+
+    void on_buttonBox_accepted();
 
 private:
     Ui::SqlManager *ui;
@@ -33,6 +40,10 @@ private:
     DatabaseManager *_databaseManager;
 
     QStringList _hiddenColumnNames;
+
+    QSqlTableModel *model() const;
+    void setModel(QSqlTableModel *model);
+    QSqlTableModel *_model;
 };
 
 #endif // SQLMANAGER_H

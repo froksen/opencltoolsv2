@@ -22,6 +22,13 @@
     </widget>
    </item>
    <item>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Dobbeltklik på en optegnelse for at redigere den.</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
       <widget class="QPushButton" name="addButton">
@@ -31,13 +38,6 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QPushButton" name="editButton">
-       <property name="text">
-        <string>Rediger</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="2">
       <widget class="QPushButton" name="removeButton">
        <property name="text">
         <string>Slet</string>
