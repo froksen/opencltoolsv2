@@ -24,7 +24,6 @@ SOURCES += main.cpp\
     tabs/selectorrandomvalue.cpp \
     tabs/selectorthing.cpp \
     classes/animationshade.cpp \
-    dialogs/thingselectoradmin.cpp \
     tabs/spinboard.cpp \
     classes/database.cpp \
     tabs/powerpausepicker.cpp \
@@ -49,7 +48,6 @@ HEADERS  += mainwindow.h \
     tabs/selectorrandomvalue.h \
     tabs/selectorthing.h \
     classes/animationshade.h \
-    dialogs/thingselectoradmin.h \
     tabs/spinboard.h \
     classes/database.h \
     tabs/powerpausepicker.h \
