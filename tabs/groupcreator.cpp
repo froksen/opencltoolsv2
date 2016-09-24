@@ -429,18 +429,16 @@ void GroupCreator::addMember()
     QModelIndexList indexes = ui->availableMembers->selectionModel()->selectedRows();
 
     foreach(QModelIndex index,indexes){
-        //Finder index´et af id og navn
-        QModelIndex idIndex = ui->availableMembers->model()->index(index.row(), 0, QModelIndex());
-        QModelIndex nameIndex = ui->availableMembers->model()->index(index.row(), 1, QModelIndex());
 
-        //Finder indholdet af id´et
-        QString id = ui->availableMembers->model()->data(idIndex).toString();
-        QString name = ui->availableMembers->model()->data(nameIndex).toString();
-
-        //Tilføjer til modellen over valgte personer.
+        //Tilføjer det nye
         int rowCount = selectedMembers()->rowCount();
-        selectedMembers()->setItem(rowCount,0,new QStandardItem(id));
-        selectedMembers()->setItem(rowCount,1,new QStandardItem(name));
+        for(int col=0;col<ui->availableMembers->model()->columnCount();col++)
+        {
+            QModelIndex itemIndex = ui->availableMembers->model()->index(index.row(), col, QModelIndex());
+            QString itemText = ui->availableMembers->model()->data(itemIndex).toString();
+
+            selectedMembers()->setItem(rowCount,col,new QStandardItem(itemText));
+        }
 
         //Fjerner/skjuler fra modellen over mulige
         ui->availableMembers->hideRow(index.row());
