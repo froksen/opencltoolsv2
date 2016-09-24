@@ -66,6 +66,8 @@ void SqlManager::loadData(QString tableName)
             ui->tableView->hideColumn(i);
         }
     }
+
+    ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 void SqlManager::on_addButton_clicked()
@@ -83,7 +85,6 @@ void SqlManager::on_removeButton_clicked()
         qDebug() << index.row();
         ui->tableView->model()->removeRow(index.row());
     }
-
     model()->submitAll();
     model()->select();
 

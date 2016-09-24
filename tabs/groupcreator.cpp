@@ -35,8 +35,12 @@ GroupCreator::GroupCreator(QWidget *parent) :
     ui->tabWidget->setCurrentIndex(0);
 
     //Tilpasser kolonnerne
-    ui->selectedMembers->horizontalHeader()->setStretchLastSection(true);
-    ui->availableMembers->horizontalHeader()->setStretchLastSection(true);
+//    ui->selectedMembers->horizontalHeader()->setStretchLastSection(true);
+//    ui->availableMembers->horizontalHeader()->setStretchLastSection(true);
+    ui->availableMembers->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->selectedMembers->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    ui->groupsOverview->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
 
 }
 
@@ -161,6 +165,23 @@ void GroupCreator::createGroups()
     }
     qDebug() << "names.count()" << names.count();
 
+    /*TODO: Lav BEDRE! */
+    if(ui->useTeamNameInList->isChecked()){
+        QStringList teams;
+        qDebug() << "selectedMembers()->rowCount()" << selectedMembers()->rowCount();
+        for(int i=0;i<selectedMembers()->rowCount();i++){
+            teams.append(selectedMembers()->item(i,2)->text());
+        }
+        qDebug() << "teams.count()" << teams.count();
+
+        QStringList tmp;
+        for(int i=0;i<names.count();i++){
+            tmp.append(names.at(i) + ", " + teams.at(i));
+        }
+
+        names = tmp;
+    }
+
     //Oplysningerne
     QStringList selectedOption = ui->groupSizeOptions->currentData().toStringList();
 
@@ -252,6 +273,8 @@ void GroupCreator::createGroups()
         currentColumn++;
         currentRow = 0;
     }
+
+    //ui->groupsOverview->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 void GroupCreator::calulateGroupSizeOptions()
