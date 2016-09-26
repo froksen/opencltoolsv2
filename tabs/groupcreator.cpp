@@ -469,6 +469,8 @@ void GroupCreator::addMember()
     }
 
     ui->availableMembers->clearSelection();
+
+    ui->selectedMembersCount->setText(QString("(%1)").arg(selectedMembers()->rowCount()));
 }
 
 void GroupCreator::removeMember()
@@ -509,6 +511,8 @@ void GroupCreator::removeMember()
     }
 
     ui->availableMembers->clearSelection();
+
+    ui->selectedMembersCount->setText(QString("(%1)").arg(selectedMembers()->rowCount()));
 }
 
 void GroupCreator::keyPressEvent(QKeyEvent *event)

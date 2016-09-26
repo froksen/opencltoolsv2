@@ -23,7 +23,7 @@
       <attribute name="title">
        <string>Vælg medlemmer</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_4">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
@@ -149,8 +149,8 @@
         </layout>
        </item>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
-         <item>
+        <layout class="QGridLayout" name="gridLayout_6" columnstretch="0,1" columnminimumwidth="0,1">
+         <item row="0" column="0">
           <widget class="QLabel" name="label_2">
            <property name="font">
             <font>
@@ -163,23 +163,30 @@
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="QTableView" name="selectedMembers">
-           <property name="editTriggers">
-            <set>QAbstractItemView::NoEditTriggers</set>
+         <item row="0" column="1">
+          <widget class="QLabel" name="selectedMembersCount">
+           <property name="text">
+            <string>(0)</string>
            </property>
-           <property name="alternatingRowColors">
-            <bool>true</bool>
-           </property>
-           <property name="sortingEnabled">
-            <bool>true</bool>
-           </property>
-           <attribute name="verticalHeaderVisible">
-            <bool>false</bool>
-           </attribute>
           </widget>
          </item>
         </layout>
+       </item>
+       <item>
+        <widget class="QTableView" name="selectedMembers">
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
+         <property name="sortingEnabled">
+          <bool>true</bool>
+         </property>
+         <attribute name="verticalHeaderVisible">
+          <bool>false</bool>
+         </attribute>
+        </widget>
        </item>
        <item>
         <widget class="QPushButton" name="gotoCreateGroupsPage">
