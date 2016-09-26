@@ -642,3 +642,13 @@ void GroupCreator::on_useTeamNameInList_clicked()
 {
     on_mixGroups_clicked();
 }
+
+void GroupCreator::on_availableMembers_doubleClicked(const QModelIndex &index)
+{
+    on_addMemberButton_clicked();
+}
+
+void GroupCreator::on_selectedMembers_doubleClicked(const QModelIndex &index)
+{
+    on_removeMemberButton_clicked();
+}

@@ -35,6 +35,10 @@ private slots:
 
     void on_useTeamNameInList_clicked();
 
+    void on_availableMembers_doubleClicked(const QModelIndex &index);
+
+    void on_selectedMembers_doubleClicked(const QModelIndex &index);
+
 private:
     Ui::GroupCreator *ui;
 
