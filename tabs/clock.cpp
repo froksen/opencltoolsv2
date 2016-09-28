@@ -39,3 +39,8 @@ void Clock::resizeEvent(QResizeEvent *)
     font.setPixelSize(this->width()/10);
     ui->time->setFont(font);
 }
+
+void Clock::on_showSeconds_toggled(bool checked)
+{
+    showTime();
+}

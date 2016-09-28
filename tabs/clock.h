@@ -18,6 +18,8 @@ public:
 private slots:
     void showTime();
 
+    void on_showSeconds_toggled(bool checked);
+
 private:
     Ui::Clock *ui;
 
