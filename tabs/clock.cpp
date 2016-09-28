@@ -22,7 +22,11 @@ Clock::~Clock()
 void Clock::showTime()
 {
     QTime time = QTime::currentTime();
+
     QString text = time.toString("hh:mm:ss");
+    if(!ui->showSeconds->isChecked()){
+        text = time.toString("hh:mm");
+    }
 //    if ((time.second() % 2) == 0)
 //        text[2] = ' ';
 
