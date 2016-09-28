@@ -32,3 +32,10 @@ void Clock::showTime()
 
     ui->time->setText(text);
 }
+
+void Clock::resizeEvent(QResizeEvent *)
+{
+    QFont font;
+    font.setPixelSize(this->width()/10);
+    ui->time->setFont(font);
+}

@@ -20,6 +20,9 @@ private slots:
 
 private:
     Ui::Clock *ui;
+
+protected:
+    void resizeEvent(QResizeEvent*);
 };
 
 #endif // CLOCK_H
