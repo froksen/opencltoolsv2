@@ -36,7 +36,8 @@ SOURCES += main.cpp\
     tabs/groupcreator.cpp \
     dialogs/simplesqlmanager.cpp \
     classes/databasemanager.cpp \
-    dialogs/sqlmanager.cpp
+    dialogs/sqlmanager.cpp \
+    tabs/clock.cpp
 
 HEADERS  += mainwindow.h \
     tabs/countdowntimer.h \
@@ -61,7 +62,8 @@ HEADERS  += mainwindow.h \
     tabs/groupcreator.h \
     dialogs/simplesqlmanager.h \
     classes/databasemanager.h \
-    dialogs/sqlmanager.h
+    dialogs/sqlmanager.h \
+    tabs/clock.h
 
 
 FORMS    += mainwindow.ui \
@@ -82,7 +84,8 @@ FORMS    += mainwindow.ui \
     tabs/CooperativeLearning/teamplate.ui \
     tabs/groupcreator.ui \
     dialogs/simplesqlmanager.ui \
-    dialogs/sqlmanager.ui
+    dialogs/sqlmanager.ui \
+    tabs/clock.ui
 
 RESOURCES += \
     resource.qrc

@@ -7,6 +7,7 @@
 #include "tabs/selectorthing.h"
 #include "tabs/spinboard.h"
 #include "tabs/powerpausepicker.h"
+#include "tabs/clock.h"
 //#include "tabs/CooperativeLearning/teamplate.h"
 #include "tabs/groupcreator.h"
 #include <QMessageBox>
@@ -19,6 +20,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    qDebug() << "Ur";
+    ui->tabWidget->addTab(new Clock,"Ur");
     qDebug() << "Nedtællingsur";
     ui->tabWidget->addTab(new CountDownTimer,"Nedtællingsur");
     qDebug() << "Tilfældigt tal";
