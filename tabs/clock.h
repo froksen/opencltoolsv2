@@ -20,6 +20,8 @@ private slots:
 
     void on_showSeconds_toggled(bool checked);
 
+    void on_showDate_toggled(bool checked);
+
 private:
     Ui::Clock *ui;
 
