@@ -39,6 +39,9 @@ private slots:
 
     void on_selectedMembers_doubleClicked(const QModelIndex &index);
 
+
+    void on_filterClass_activated(const QString &arg1);
+
 private:
     Ui::GroupCreator *ui;
 

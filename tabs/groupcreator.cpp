@@ -9,7 +9,7 @@
 #include <QClipboard>
 #include <QKeySequence>
 #include <QMessageBox>
-
+#include <QSortFilterProxyModel>
 
 GroupCreator::GroupCreator(QWidget *parent) :
     QWidget(parent),
@@ -436,18 +436,13 @@ void GroupCreator::updateAvailableMemebersTable()
                 "`navn`	TEXT"
             ");";
 
-    ui->availableMembers->setModel(database()->selectTable("tblPersoner",createQry));
-    ui->availableMembers->setSelectionBehavior(QAbstractItemView::SelectRows);
+    QSqlTableModel *source = database()->selectTable("tblPersoner",createQry);
+    ui->availableMembers->setModel(source);
 
-    ui->availableMembers->hideColumn(0);
-
-//    ui->availableMembers->model()->set->setHorizontalHeaderItem(0, new QStandardItem("Id"));
-//    selectedMembers->setHorizontalHeaderItem(1, new QStandardItem("Navn"));
-
-    //selectedMembers skal have de samme kolonner, som SQL-modellen
     ui->selectedMembers->hideColumn(0);
 
     //Opdater filterne
+    QString previousSelected = ui->filterClass->currentText();
     QStringList classNames;
     classNames.append("Vis alle");
     for(int i=0;i<ui->availableMembers->model()->rowCount();i++){
@@ -458,8 +453,24 @@ void GroupCreator::updateAvailableMemebersTable()
             classNames.append(className);
         }
     }
-
+    ui->filterClass->clear();
     ui->filterClass->insertItems(-1,classNames);
+    ui->filterClass->setCurrentText(previousSelected);
+
+
+    //ProxyFilter
+    if(ui->filterClass->currentText() != "Vis alle"){
+        QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel(this);
+        proxyModel->setSourceModel(source);
+        proxyModel->setFilterKeyColumn(2);
+        proxyModel->setFilterRegExp(QRegExp(ui->filterClass->currentText(), Qt::CaseInsensitive,
+                                            QRegExp::FixedString));
+
+       ui->availableMembers->setModel(proxyModel);
+    }
+
+    ui->availableMembers->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->availableMembers->hideColumn(0);
 }
 
 void GroupCreator::addMember()
@@ -669,4 +680,10 @@ void GroupCreator::on_availableMembers_doubleClicked(const QModelIndex &index)
 void GroupCreator::on_selectedMembers_doubleClicked(const QModelIndex &index)
 {
     on_removeMemberButton_clicked();
+}
+
+
+void GroupCreator::on_filterClass_activated(const QString &arg1)
+{
+    updateAvailableMemebersTable();
 }
