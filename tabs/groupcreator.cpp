@@ -446,6 +446,20 @@ void GroupCreator::updateAvailableMemebersTable()
 
     //selectedMembers skal have de samme kolonner, som SQL-modellen
     ui->selectedMembers->hideColumn(0);
+
+    //Opdater filterne
+    QStringList classNames;
+    classNames.append("Vis alle");
+    for(int i=0;i<ui->availableMembers->model()->rowCount();i++){
+        QModelIndex index = ui->availableMembers->model()->index(i,2,QModelIndex());
+        QString className = ui->availableMembers->model()->data(index).toString();
+
+        if(!classNames.contains(className) && className != ""){
+            classNames.append(className);
+        }
+    }
+
+    ui->filterClass->insertItems(-1,classNames);
 }
 
 void GroupCreator::addMember()
