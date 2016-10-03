@@ -10,6 +10,8 @@
 #include <QKeySequence>
 #include <QMessageBox>
 #include <QSortFilterProxyModel>
+#include <QDesktopServices>
+#include <QTemporaryDir>
 
 GroupCreator::GroupCreator(QWidget *parent) :
     QWidget(parent),
@@ -686,4 +688,26 @@ void GroupCreator::on_selectedMembers_doubleClicked(const QModelIndex &index)
 void GroupCreator::on_filterClass_activated(const QString &arg1)
 {
     updateAvailableMemebersTable();
+}
+
+void GroupCreator::on_helpButton1_clicked()
+{
+    QTemporaryDir tmpDir;
+    if(!tmpDir.isValid()){
+        QMessageBox::critical(this,"Fejl","Kunne ikke åbne hjælpefilen. Beklager..");
+    }
+
+    QFile hFile(":/help/gruppeskaber.pdf");
+    QFile hFileTmp;
+    hFileTmp.setFileName(QDir::tempPath() + "/gruppeskaber.pdf");
+
+    if(!hFileTmp.exists()){
+        if(!hFile.copy(hFileTmp.fileName())){
+            qDebug() << "FEJL: Kunne ikke kopire" << hFile.fileName() << "til" << hFileTmp.fileName();
+            QMessageBox::critical(this,"Fejl","Kunne ikke åbne hjælpefilen. Beklager..");
+            return;
+        }
+    }
+
+    QDesktopServices::openUrl(QUrl(hFileTmp.fileName()));
 }

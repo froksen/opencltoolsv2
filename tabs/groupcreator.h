@@ -42,6 +42,8 @@ private slots:
 
     void on_filterClass_activated(const QString &arg1);
 
+    void on_helpButton1_clicked();
+
 private:
     Ui::GroupCreator *ui;
 
