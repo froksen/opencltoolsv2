@@ -118,7 +118,7 @@
          <item row="0" column="2">
           <widget class="QPushButton" name="addMemberButton">
            <property name="text">
-            <string>Tilvælg</string>
+            <string>Vælg</string>
            </property>
           </widget>
          </item>
@@ -139,7 +139,7 @@
          <item row="0" column="7">
           <widget class="QPushButton" name="addAllMemberButton">
            <property name="text">
-            <string>Tilvælg alle</string>
+            <string>Vælg alle</string>
            </property>
           </widget>
          </item>
