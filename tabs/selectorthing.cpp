@@ -182,10 +182,10 @@ void SelectorThing::on_btnNewOutcome_clicked()
 
 void SelectorThing::on_btnManageOptions_clicked()
 {
-    SimpleSqlManager *dialog = new SimpleSqlManager(this);
+    QScopedPointer<SimpleSqlManager> dialog(new SimpleSqlManager);
     dialog->loadTable("startbythings");
     dialog->setDataType("Sætning");
-    dialog->setVisibleColumn(0);
+    dialog->setVisibleColumn(1);
     dialog->exec();
 
     //Genindlæser værdierne
