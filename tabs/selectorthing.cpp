@@ -55,8 +55,6 @@ void SelectorThing::loadOutcomes()
         qDebug() << model->lastError().text();
     }
 
-    qDebug() << "Row Count" << model->rowCount();
-
     //Hvis der ikke er nogle værdier i tabellen, da udfyldes den med disse
     if(model->rowCount()<=0){
         QStringList defaultTexts;
@@ -183,9 +181,9 @@ void SelectorThing::on_btnNewOutcome_clicked()
 void SelectorThing::on_btnManageOptions_clicked()
 {
     QScopedPointer<SimpleSqlManager> dialog(new SimpleSqlManager);
+    dialog->setVisibleColumn(1);
     dialog->loadTable("startbythings");
     dialog->setDataType("Sætning");
-    dialog->setVisibleColumn(1);
     dialog->exec();
 
     //Genindlæser værdierne

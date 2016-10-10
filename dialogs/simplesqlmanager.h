@@ -36,11 +36,6 @@ private slots:
 private:
     Ui::SimpleSqlManager *ui;
     void setupDatabase();
-
-    QSqlTableModel *model() const;
-    void setModel(QSqlTableModel *model);
-    QSqlTableModel *_model;
-
     void reloadTable();
 
     DatabaseManager *databaseManager() const;

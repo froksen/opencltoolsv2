@@ -14,7 +14,6 @@ SimpleSqlManager::SimpleSqlManager(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SimpleSqlManager)
 {
-    setupDatabase();
     ui->setupUi(this);
 }
 
@@ -23,35 +22,32 @@ SimpleSqlManager::~SimpleSqlManager()
     delete ui;
 }
 
-void SimpleSqlManager::setupDatabase()
-{
-    setDatabaseManager(new DatabaseManager());
-    databaseManager()->open();
-}
-
-QSqlTableModel *SimpleSqlManager::model() const
-{
-    return _model;
-}
-
-void SimpleSqlManager::setModel(QSqlTableModel *model)
-{
-    _model = model;
-}
-
 
 void SimpleSqlManager::reloadTable()
 {
-    if(!databaseManager()->currentDatabase().isOpen()){
-        setupDatabase();
+
+    //Forbindelse til DB
+    QSqlDatabase db = QSqlDatabase::database("default_connection",true);
+    if(!db.isOpen()){
+        qDebug() << "Læsning af databasen mislykkedes.";
+        qDebug() << db.lastError().text();
     }
-    setModel(databaseManager()->selectTable(tableName()));
-    model()->setEditStrategy(QSqlTableModel::OnRowChange);
 
+    //QScopedPointer<QSqlTableModel> model(new QSqlTableModel(this,db));
+    QSqlTableModel *model = new QSqlTableModel(this,db); //Brugt "rigtig" pointer, da jeg ikke kan få ScopedPointer til at virke.
+    model->setTable(tableName());
+    if(!model->select()){
+        qDebug() << "Læsning af tabel" << "startbythings" << "mislykkedes!";
+        qDebug() << model->lastError().text();
+    }
+
+    ui->cboExisting->setModel(model);
     ui->cboExisting->setModelColumn(visibleColumn());
-    ui->cboExisting->setModel(model());
-
     ui->cboExisting->setFocus();
+
+    //Delete pointer
+    model = NULL;
+    delete model;
 }
 
 DatabaseManager *SimpleSqlManager::databaseManager() const
@@ -106,13 +102,17 @@ void SimpleSqlManager::on_btnAdd_clicked()
         return;
     }
 
-    QSqlRecord record = model()->record();
-    //record.setValue();
-    record.setValue(visibleColumn(),newText);
-    model()->insertRecord(-1,record);
-    model()->submitAll();
-    reloadTable();
-    ui->cboExisting->setCurrentIndex(model()->rowCount()-1);
+    ui->cboExisting->addItem(newText);
+    ui->cboExisting->model()->submit();
+
+//    QSqlRecord record =ui->cboExisting;// = new QSqlRecord(); = //ui->cboExisting->model()model()->record();
+//    //record.setValue();
+//    record.setValue(visibleColumn(),newText);
+//    ui->cboExisting->model()->insert
+//    model()->insertRecord(-1,record);
+//    model()->submitAll();
+//    reloadTable();
+//    ui->cboExisting->setCurrentIndex(model()->rowCount()-1);
 }
 
 
@@ -154,8 +154,6 @@ void SimpleSqlManager::on_cboExisting_currentTextChanged(const QString &arg1)
 
 void SimpleSqlManager::on_btnSaveClose_clicked()
 {
-        databaseManager()->closeAndRemoveDatabase();
-
         ui->cboExisting->model()->submit();
         this->close();
 }

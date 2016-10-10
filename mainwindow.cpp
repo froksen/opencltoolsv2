@@ -14,12 +14,20 @@
 #include <QMediaPlayer>
 #include <QDate>
 #include <QDebug>
+#include <QSqlDatabase>
+#include <QMessageBox>
+#include <QSqlError>
+#include <QSqlQuery>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    //DB
+    initDB();
     ui->setupUi(this);
+
+    //Fanebladene
     qDebug() << "Ur";
     ui->tabWidget->addTab(new Clock,"Ur");
     qDebug() << "Nedtællingsur";
@@ -30,12 +38,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tabWidget->addTab(new SelectorFinger,"Vælger (Hånd)");
     qDebug() << "Vælger (Ting)";
     ui->tabWidget->addTab(new SelectorThing,"Vælger (Ting)");
-    qDebug() << "Vælger (Tal)";
-    ui->tabWidget->addTab(new SpinBoard,"Vælger (Tal)");
-    qDebug() << "PowerPause vælger";
-    ui->tabWidget->addTab(new PowerPausePicker,"PowerPause vælger");
-    qDebug() << "Gruppeskaber";
-    ui->tabWidget->addTab(new GroupCreator,"Gruppeskaber");
+//    qDebug() << "Vælger (Tal)";
+//    ui->tabWidget->addTab(new SpinBoard,"Vælger (Tal)");
+//    qDebug() << "PowerPause vælger";
+//    ui->tabWidget->addTab(new PowerPausePicker,"PowerPause vælger");
+//    qDebug() << "Gruppeskaber";
+//    ui->tabWidget->addTab(new GroupCreator,"Gruppeskaber");
     //ui->tabWidget->addTab(new OrderChooser,"Gl. Gruppeskaber");
 //    //ui->tabWidget->addTab(new TeamPlate,"CL: Teamplade");
     ui->tabWidget->setCurrentIndex(0);
@@ -100,6 +108,59 @@ void MainWindow::on_actionFuldsk_rm_Vindue_triggered()
         return;
     }
     setWindowState(Qt::WindowFullScreen);
+}
+
+void MainWindow::initDB()
+{
+    //************************************
+    //* DATABASE
+    //*************************************
+    //Forbindelsen
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE","default_connection");
+    db.setDatabaseName("db.sqlite");
+    if(!db.open()){
+        QMessageBox::critical(0,"Fejl","Der skete en fejl ved indlæsning af databasen. Alle funktioner er måske ikke tilgængelige.\nFejlbeskrivelse: " + db.lastError().text(),QMessageBox::Ok);
+    }
+
+    /* DATABASE QUERIES */
+    //Udfører Queries. - Lavet lidt dumt. Det er SQLDatabasen der sikre, at der ikke sker fejl :S
+
+    QStringList dbTables = db.tables();
+    QStringList defaultDbTables;
+    defaultDbTables << "tblPersoner" << "powerpauses" << "startbythings";
+
+    foreach(QString tableName, defaultDbTables){
+        if(!dbTables.contains(tableName)){
+            QString qry = QString("CREATE TABLE '%1' (`id`	INTEGER PRIMARY KEY AUTOINCREMENT);").arg(tableName);
+            qDebug() << "Database tabel" << tableName << "ikke fundet." << "Opretter tabel.";
+            qDebug() << "Udfører query" << qry;
+            db.exec(qry);
+
+            if(db.lastError().type() != QSqlError::NoError){
+                qDebug() << "Oprettelse af tabel" << tableName << "mislykkedes." << "Query:" << qry << "Fejl:"<< db.lastError().text();
+            }
+        }
+    }
+
+    //Tilføjer kolonnenavne
+    QStringList alterQrys;
+    alterQrys << "ALTER TABLE tblPersoner ADD COLUMN id INTEGER PRIMARY KEY AUTOINCREMENT;"
+             <<"ALTER TABLE tblPersoner ADD COLUMN hold TEXT;"
+            <<"ALTER TABLE tblPersoner ADD COLUMN navn TEXT;"
+           << "ALTER TABLE startbythings ADD COLUMN text TEXT;"
+           <<"ALTER TABLE powerpauses ADD COLUMN id INTEGER PRIMARY KEY AUTOINCREMENT;"
+          <<"ALTER TABLE powerpauses ADD COLUMN isActive INTEGER DEFAULT 1;"
+         <<"ALTER TABLE powerpauses ADD COLUMN title TEXT;"
+        <<"ALTER TABLE powerpauses ADD COLUMN helptext TEXT;"
+       <<"ALTER TABLE powerpauses ADD COLUMN image BLOB;";
+
+    foreach(QString alterQry, alterQrys){
+        db.exec(alterQry);
+
+        if(db.lastError().type() != QSqlError::NoError){
+            qDebug() << "Fejl ved udførelse af query" << alterQry <<". Fejl:" << db.lastError().number() << "Beskrivelse:" << db.lastError().text();
+        }
+    }
 }
 
 DatabaseManager *MainWindow::databaseManager() const
