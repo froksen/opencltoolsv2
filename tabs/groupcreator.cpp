@@ -654,14 +654,7 @@ void GroupCreator::on_gotoSelectMembersPage_clicked()
 
 void GroupCreator::on_adminPersonsButton_clicked()
 {   
-//    SimpleSqlManager *dialog = new SimpleSqlManager(this);
-//    dialog->setVisibleColumn(1);
-//    dialog->loadTable("tblPersoner");
-//    dialog->loadTable("tblPersoner");
-//    dialog->setDataType("Personer");
-//    dialog->exec();
-
-    SqlManager *dialog = new SqlManager(this);
+    QScopedPointer<SqlManager> dialog(new SqlManager(this));
     dialog->setHiddenColumnNames(QStringList() << "id");
     dialog->loadData("tblPersoner");
     dialog->exec();
