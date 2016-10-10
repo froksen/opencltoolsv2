@@ -41,12 +41,21 @@ void SelectorThing::resizeEvent(QResizeEvent *evt)
 
 void SelectorThing::loadOutcomes()
 {
-    //Opsætter DB
-    setDatabasemanager(new DatabaseManager);
-    getDatabasemanager()->open();
+    //Forbindelse til DB
+    QSqlDatabase db = QSqlDatabase::database("default_connection",true);
+    if(!db.isOpen()){
+        qDebug() << "Læsning af databasen mislykkedes.";
+        qDebug() << db.lastError().text();
+    }
 
-    //Vælger model
-    QSqlTableModel *model = getDatabasemanager()->selectTable("startbythings"); //db->selectTable("startbythings","CREATE TABLE `startbythings` (`text` TEXT)");
+    QScopedPointer<QSqlTableModel> model(new QSqlTableModel(this,db));
+    model->setTable("startbythings");
+    if(!model->select()){
+        qDebug() << "Læsning af tabel" << "startbythings" << "mislykkedes!";
+        qDebug() << model->lastError().text();
+    }
+
+    qDebug() << "Row Count" << model->rowCount();
 
     //Hvis der ikke er nogle værdier i tabellen, da udfyldes den med disse
     if(model->rowCount()<=0){
@@ -77,28 +86,26 @@ void SelectorThing::loadOutcomes()
 
         //Tilføjer standard sætningerne
         foreach(QString txt, defaultTexts){
-            getDatabasemanager()->exec(QString("insert into startbythings values('%1')").arg(txt));
+            db.exec((QString("insert into startbythings ('text') VALUES('%1')").arg(txt)));
+
+            if(db.lastError().text()!= " "){
+                qDebug() << "Fejl ved oprettelse af udfald. Fejl:" << db.lastError().text();
+            }
         }
 
-        //Genindlæser modellen
+//        //Genindlæser modellen
         model->select();
     }
 
-    //Sletter evt. gamle
+//    //Sletter evt. gamle
     QStringList list;
     setOutcomes(list);
 
-    //Tilføjer nye værdier
+//    //Tilføjer nye værdier
     for(int i=0;i<model->rowCount();i++){
         appendOutcomes(model->record(i).value("text").toString());
     }
 
-    //Sletter pointer
-    model = NULL;
-    delete model;
-
-    //Lukker databasen
-    getDatabasemanager()->closeAndRemoveDatabase();
 }
 
 QStringList SelectorThing::getOutcomes() const
