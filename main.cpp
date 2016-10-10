@@ -80,7 +80,6 @@ int main(int argc, char *argv[])
         }
     }
 
-    mSplashScreen->showMessage("Alle tabeller oprettet!",Qt::AlignLeft,Qt::white);
     mSplashScreen->showMessage("Indlæser...",Qt::AlignLeft,Qt::white);
 
     //Hoved vinduet
@@ -89,8 +88,6 @@ int main(int argc, char *argv[])
     //Viser GUI
     mSplashScreen->finish(&w);
     w.show();
-
-    //QTimer::singleShot(2200,&w,SLOT(show())); //Sikre, at splashscreenen vises mindst 1200 ms
 
     return a.exec();
 }
