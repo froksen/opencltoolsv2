@@ -12,6 +12,7 @@
 #include <QSortFilterProxyModel>
 #include <QDesktopServices>
 #include <QTemporaryDir>
+#include <QSqlError>
 
 GroupCreator::GroupCreator(QWidget *parent) :
     QWidget(parent),
@@ -20,7 +21,7 @@ GroupCreator::GroupCreator(QWidget *parent) :
     ui->setupUi(this);
 
     //Laver databasen
-    setDatabase(new Database());
+//    setDatabase(new Database());
 
 
     //Opdaterer tabellen
@@ -431,15 +432,21 @@ void GroupCreator::calulateGroupSizeOptions()
 
 void GroupCreator::updateAvailableMemebersTable()
 {
-    QString createQry;
+    //Forbindelse til DB
+    QSqlDatabase db = QSqlDatabase::database("default_connection",true);
+    if(!db.isOpen()){
+        qDebug() << "Læsning af databasen mislykkedes.";
+        qDebug() << db.lastError().text();
+    }
 
-    createQry = "CREATE TABLE `tblPersoner` ("
-                "`id`	INTEGER PRIMARY KEY AUTOINCREMENT,"
-                "`navn`	TEXT"
-            ");";
+    QSqlTableModel *model = new QSqlTableModel(this,db);
+    model->setTable("tblPersoner");
+    if(!model->select()){
+        qDebug() << "Læsning af tabel" << "tblPersoner" << "mislykkedes!";
+        qDebug() << model->lastError().text();
+    }
 
-    QSqlTableModel *source = database()->selectTable("tblPersoner",createQry);
-    ui->availableMembers->setModel(source);
+    ui->availableMembers->setModel(model);
 
     ui->selectedMembers->hideColumn(0);
 
@@ -463,7 +470,7 @@ void GroupCreator::updateAvailableMemebersTable()
     //ProxyFilter
     if(ui->filterClass->currentText() != "Vis alle"){
         QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel(this);
-        proxyModel->setSourceModel(source);
+        proxyModel->setSourceModel(model);
         proxyModel->setFilterKeyColumn(2);
         proxyModel->setFilterRegExp(QRegExp(ui->filterClass->currentText(), Qt::CaseInsensitive,
                                             QRegExp::FixedString));
@@ -473,6 +480,10 @@ void GroupCreator::updateAvailableMemebersTable()
 
     ui->availableMembers->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->availableMembers->hideColumn(0);
+
+    //Delete pointer
+    model = 0;
+    delete model;
 }
 
 void GroupCreator::addMember()
@@ -655,9 +666,7 @@ void GroupCreator::on_adminPersonsButton_clicked()
     dialog->loadData("tblPersoner");
     dialog->exec();
 
-    ui->availableMembers->setModel(database()->refreshTable());
-    ui->availableMembers->setSelectionBehavior(QAbstractItemView::SelectRows);
-
+    updateAvailableMemebersTable();
     ui->availableMembers->hideColumn(0);
 }
 

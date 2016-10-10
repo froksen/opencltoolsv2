@@ -120,7 +120,6 @@ void SimpleSqlManager::on_cboExisting_editTextChanged(const QString &arg1)
 {
     ui->cboExisting->setItemText(ui->cboExisting->currentIndex(),arg1);
     ui->cboExisting->model()->submit();
-
 }
 
 void SimpleSqlManager::on_btnDelete_clicked()
