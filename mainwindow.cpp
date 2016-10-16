@@ -7,6 +7,7 @@
 #include "tabs/selectorthing.h"
 #include "tabs/spinboard.h"
 #include "tabs/powerpausepicker.h"
+#include "tabs/stopwatch.h"
 #include "tabs/clock.h"
 //#include "tabs/CooperativeLearning/teamplate.h"
 #include "tabs/groupcreator.h"
@@ -28,6 +29,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     //Fanebladene
+    qDebug() << "Stopur";
+    ui->tabWidget->addTab(new StopWatch,"Ur");
     qDebug() << "Ur";
     ui->tabWidget->addTab(new Clock,"Ur");
     qDebug() << "Nedtællingsur";
