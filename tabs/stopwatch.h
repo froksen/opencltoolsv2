@@ -26,20 +26,24 @@ private slots:
     void on_showHours_clicked();
     void on_showMinuts_clicked();
 
+
 private:
     Ui::StopWatch *ui;
 
     QTimer *tickTimer() const;
     void setTickTimer(QTimer *tickTimer);
 
-    quint64 time() const;
-    void setTime(const quint64 &time);
+    double time() const;
+    void setTime(const double &time);
 
     void updateFormat();
 
     QString _timeFormat;
     QTimer *_tickTimer;
-    quint64 _time;
+    double _time;
+
+    void resizeEvent(QResizeEvent*);
+
 };
 
 #endif // STOPWATCH_H

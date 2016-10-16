@@ -2,6 +2,7 @@
 #include "ui_stopwatch.h"
 #include <QDebug>
 #include <QTime>
+#include <QFont>
 
 StopWatch::StopWatch(QWidget *parent) :
     QWidget(parent),
@@ -11,10 +12,13 @@ StopWatch::StopWatch(QWidget *parent) :
 
     QTimer *tickTimer = new QTimer(this);
     connect(tickTimer,SIGNAL(timeout()),this,SLOT(updateTimer()));
-    tickTimer->setInterval(100);
+    tickTimer->setInterval(1);
     setTickTimer(tickTimer);
 
-    setTime(0);
+    setTime(100);
+    setTime(59*60*1000+55*1000);
+    updateFormat();
+    updateTimer();
 }
 
 StopWatch::~StopWatch()
@@ -31,7 +35,25 @@ void StopWatch::updateTimer()
     }
 
     qDebug() << "updateTimer";
-    QString text = QTime(0,0,0).addMSecs(time()).toString(timeFormat());
+    QTime timestamp = QTime(0,0,0).addMSecs(time());
+    QString text = timestamp.toString(timeFormat());
+
+    //Hvis der kun skal vises sekunder og minutter
+    if(!ui->showHours->isChecked()){
+        int msecs = QTime(0,0).msecsTo(timestamp);
+        //int hours = msecs/(1000*60*60);
+        int minutes = (msecs)/(1000*60);
+        int seconds = (msecs-(minutes*1000*60))/1000;
+        int milliseconds = msecs-(seconds*1000)-(minutes*1000*60);
+
+        text = QString::number(minutes) + ":" + QString::number(seconds);
+    }
+
+    //Hvis der kun skal vises sekunder
+    if(!ui->showHours->isChecked() && !ui->showMinuts->isChecked()){
+        text = QString::number(QTime(0,0).secsTo(timestamp));
+    }
+
    ui->time->setText(text);
 }
 
@@ -56,12 +78,12 @@ void StopWatch::on_StartStopButton_clicked()
     tickTimer()->start(); //Starter timer;
 }
 
-quint64 StopWatch::time() const
+double StopWatch::time() const
 {
     return _time;
 }
 
-void StopWatch::setTime(const quint64 &time)
+void StopWatch::setTime(const double &time)
 {
     _time = time;
 }
@@ -69,24 +91,41 @@ void StopWatch::setTime(const quint64 &time)
 void StopWatch::updateFormat()
 {
     QString formatText;
+    QString formatLabelText;
    //Timer
     if(ui->showHours->isChecked())
     {
         formatText.append("HH:");
+        formatLabelText.append("Timer:");
     }
 
     //Minutter
     if(ui->showMinuts->isChecked())
     {
         formatText.append("mm:");
+        formatLabelText.append("Minutter:");
     }
 
 
     //Sekunder
     formatText.append("ss");
+    formatLabelText.append("Sekunder");
+
 
     //Sætter det nye format
     setTimeFormat(formatText);
+    ui->formatLabel->setText(formatLabelText);
+}
+
+void StopWatch::resizeEvent(QResizeEvent *)
+{
+    //    //Tilpasser teksten
+        QFont font;
+        font.setPixelSize(this->width()/10);
+        ui->time->setFont(font);
+
+        font.setPixelSize(this->width()/50);
+        ui->formatLabel->setFont(font);
 }
 
 QString StopWatch::timeFormat() const

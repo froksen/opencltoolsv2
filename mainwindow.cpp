@@ -29,10 +29,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     //Fanebladene
-    qDebug() << "Stopur";
-    ui->tabWidget->addTab(new StopWatch,"Ur");
     qDebug() << "Ur";
     ui->tabWidget->addTab(new Clock,"Ur");
+    qDebug() << "Stopur";
+    ui->tabWidget->addTab(new StopWatch,"Stopur");
     qDebug() << "Nedtællingsur";
     ui->tabWidget->addTab(new CountDownTimer,"Nedtællingsur");
     qDebug() << "Tilfældigt tal";
