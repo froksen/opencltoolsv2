@@ -16,7 +16,7 @@ StopWatch::StopWatch(QWidget *parent) :
     setTickTimer(tickTimer);
 
     setTime(100);
-    setTime(59*60*1000+55*1000);
+    setTime(0);
     updateFormat();
     updateTimer();
 }
