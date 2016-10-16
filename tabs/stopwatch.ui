@@ -48,6 +48,9 @@
        <property name="text">
         <string>Vis timer</string>
        </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item row="0" column="1">
@@ -55,12 +58,8 @@
        <property name="text">
         <string>Vis minutter</string>
        </property>
-      </widget>
-     </item>
-     <item row="0" column="2">
-      <widget class="QCheckBox" name="showSeconds">
-       <property name="text">
-        <string>Vis sekunder</string>
+       <property name="checked">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
