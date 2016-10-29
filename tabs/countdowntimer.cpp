@@ -29,7 +29,7 @@ CountDownTimer::CountDownTimer(QWidget *parent) :
     connect(timer,SIGNAL(timeout()),this,SLOT(toggleButtons())); //Knapperne
     connect(tickTimer,SIGNAL(timeout()),this,SLOT(tickTimerTimeout())); //tickTimer timeout
 
-    setAudioPlayer(new QSoundEffect(this));
+    setAudioPlayer(new QMediaPlayer(this));
 
 
     timerIntervalAtStart = 0;
@@ -47,7 +47,7 @@ void CountDownTimer::timerTimeout()
 
     getAudioPlayer()->stop();
     //getAudioPlayer()->setSource(QUrl::fromLocalFile(":/sounds/alarm.wav"));
-    getAudioPlayer()->setSource(QUrl::fromLocalFile(QCoreApplication::applicationDirPath () + "/sounds/alarm.wav"));
+    getAudioPlayer()->setMedia(QUrl::fromLocalFile(QCoreApplication::applicationDirPath () + "/sounds/alarm.wav"));
     getAudioPlayer()->play();
 
     QFont dfFont("MS Shell Dlg 2");
@@ -92,15 +92,20 @@ void CountDownTimer::tickTimerTimeout()
     //Trækker 3600000 (1 time i ms) fra, da der ellers vises en time for meget.
     //timeText = QDateTime::fromMSecsSinceEpoch(getTimerRemainingTime()-3600000).toString("HH:mm:ss:zzz");
 
-    if(ui->cbJBEffekt->isChecked() && getTimerRemainingTime() <= (10*1000) && !getAudioPlayer()->isPlaying()){ //&& getTimerRemainingTime()%2000 == 0
+    if(ui->cbJBEffekt->isChecked() && getTimerRemainingTime() <= (10*1000)){ //&& getTimerRemainingTime()%2000 == 0
         int id = QFontDatabase::addApplicationFont(":/fonts/24.ttf");
         QString family = QFontDatabase::applicationFontFamilies(id).at(0);
         QFont jbFont(family);
         jbFont.setPixelSize(ui->lblTime->font().pixelSize());
 
         ui->lblTime->setFont(jbFont);
-
-        getAudioPlayer()->play();
+        qDebug() << "STATE" << getAudioPlayer()->state();
+        if(getAudioPlayer()->state() != QMediaPlayer::PlayingState){
+            qDebug() << "JBEffect started";
+            getAudioPlayer()->setMedia(QUrl("qrc:/sounds/jbcountdown.mp3"));
+            getAudioPlayer()->setVolume(100);
+            getAudioPlayer()->play();
+        }
     }
 
     if(!ui->cbJBEffekt->isChecked()){
@@ -195,20 +200,21 @@ bool CountDownTimer::runTimer()
     return true;
 }
 
-QSoundEffect *CountDownTimer::getAudioPlayer() const
-{
-    return _audioPlayer;
-}
 
-void CountDownTimer::setAudioPlayer(QSoundEffect *audioPlayer)
+
+void CountDownTimer::setAudioPlayer(QMediaPlayer *audioPlayer)
 {
     _audioPlayer = audioPlayer;
+}
+
+QMediaPlayer *CountDownTimer::getAudioPlayer() const
+{
+    return _audioPlayer;
 }
 
 void CountDownTimer::on_btnStartStop_clicked()
 {
     if(ui->cbJBEffekt->isChecked()){
-        getAudioPlayer()->setSource(QUrl::fromLocalFile(":/sounds/jbcountdown.wav"));
         getAudioPlayer()->stop();
     }
 

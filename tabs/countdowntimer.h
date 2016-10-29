@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QTimer>
 #include <QSound>
-#include <QSoundEffect>
+#include <QMediaPlayer>
 
 namespace Ui {
 class CountDownTimer;
@@ -40,8 +40,8 @@ private:
     void resizeEvent(QResizeEvent*);
 
 
-    QSoundEffect *getAudioPlayer() const;
-    void setAudioPlayer(QSoundEffect *audioPlayer);
+    QMediaPlayer *getAudioPlayer() const;
+    void setAudioPlayer(QMediaPlayer *audioPlayer);
 
 
     bool runTimer();
@@ -51,7 +51,7 @@ private:
     QTimer *tickTimer;
     int timerIntervalAtStart;
 
-    QSoundEffect *_audioPlayer;
+    QMediaPlayer *_audioPlayer;
 
 
 };

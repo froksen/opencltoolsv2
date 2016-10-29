@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>sounds/alarm.wav</file>
         <file>img/fingerFive.png</file>
         <file>img/fingerFour.png</file>
         <file>img/fingerOne.png</file>
@@ -17,12 +16,11 @@
         <file>img/Actions-insert-link-icon.png</file>
         <file>img/Editing-Bold-icon.png</file>
         <file>img/PowerPause_Styrbilen.png</file>
-        <file>sounds/jbcountdown.wav</file>
         <file>fonts/24.ttf</file>
-        <file>sounds/of.mp3</file>
         <file>img/CL_Teamplade.png</file>
         <file>img/logo.png</file>
         <file>img/512px-Copy_font_awesome.png</file>
         <file>help/gruppeskaber.pdf</file>
+        <file>sounds/jbcountdown.mp3</file>
     </qresource>
 </RCC>

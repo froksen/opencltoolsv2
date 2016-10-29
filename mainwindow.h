@@ -22,7 +22,6 @@ public:
 private slots:
     void on_actionAfslut_triggered();
     void on_actionOm_triggered();
-    void on_actionH_r_sangen_triggered();
     void on_actionFuldsk_rm_Vindue_triggered();
 
 private:
