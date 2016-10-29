@@ -73,8 +73,15 @@ void MainWindow::on_actionOm_triggered()
 {
     QString text;
     text = "Ole Dahl Frandsen <br>"
-           "(c) 2016 <br>"
-           "Licens: GPL v2";
+           "OpenCL Tools (c) 2016 <br>"
+           "License: GPL v2"
+            "<br>"
+            "<br>"
+            "alarm.mp3 (Temple Bell sound) by Mike Koenig<br>"
+            "License: Attribution 3.0"
+           "<br>"
+           "<br>"
+            "All other trademarks, servicemarks, registered trademarks, and registered servicemarks are the property of their respective owners";
 
     QMessageBox::information(this,"Om",text);
 }

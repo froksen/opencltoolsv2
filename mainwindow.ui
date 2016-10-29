@@ -128,7 +128,10 @@ height: 25px;
   </action>
   <action name="actionFuldsk_rm_Vindue">
    <property name="text">
-    <string>Fuldskærm/Vindue</string>
+    <string>Fuldskærm</string>
+   </property>
+   <property name="toolTip">
+    <string>Viser programmet i fuldskærm</string>
    </property>
   </action>
  </widget>
