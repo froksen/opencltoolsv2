@@ -47,7 +47,7 @@ void CountDownTimer::timerTimeout()
 
     getAudioPlayer()->stop();
     //getAudioPlayer()->setSource(QUrl::fromLocalFile(":/sounds/alarm.wav"));
-    getAudioPlayer()->setMedia(QUrl::fromLocalFile(QCoreApplication::applicationDirPath () + "/sounds/alarm.wav"));
+    getAudioPlayer()->setMedia(QUrl::fromLocalFile(QCoreApplication::applicationDirPath () + "/sounds/alarm.mp3"));
     getAudioPlayer()->play();
 
     QFont dfFont("MS Shell Dlg 2");
