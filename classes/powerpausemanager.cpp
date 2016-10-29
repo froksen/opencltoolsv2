@@ -89,13 +89,15 @@ bool PowerPauseManager::append(QString title, QString helpText, QPixmap image)
                 newPicture.save(&buffer, "PNG");
 
     append(title,helpText,bytes);
+
+    return true;
 }
 
 
 
 bool PowerPauseManager::save()
 {
-    _model->submitAll();
+    return _model->submitAll();
 }
 
 Database *PowerPauseManager::database() const
