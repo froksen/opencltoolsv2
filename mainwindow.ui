@@ -98,12 +98,6 @@ height: 25px;
     <addaction name="actionOm"/>
     <addaction name="actionAfslut"/>
    </widget>
-   <widget class="QMenu" name="menuF_DSELSDAG_11_SEPTEMBER">
-    <property name="title">
-     <string>FØDSELSDAG! 11. SEPTEMBER</string>
-    </property>
-    <addaction name="actionH_r_sangen"/>
-   </widget>
    <widget class="QMenu" name="menuVis">
     <property name="title">
      <string>Vis</string>
@@ -111,7 +105,6 @@ height: 25px;
     <addaction name="actionFuldsk_rm_Vindue"/>
    </widget>
    <addaction name="menuProgram"/>
-   <addaction name="menuF_DSELSDAG_11_SEPTEMBER"/>
    <addaction name="menuVis"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
@@ -131,11 +124,6 @@ height: 25px;
   <action name="actionAfslut">
    <property name="text">
     <string>Afslut</string>
-   </property>
-  </action>
-  <action name="actionH_r_sangen">
-   <property name="text">
-    <string>Hør sangen!</string>
    </property>
   </action>
   <action name="actionFuldsk_rm_Vindue">

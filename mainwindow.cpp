@@ -54,17 +54,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->mainToolBar->setHidden(true);
 
-
-    //Fødselsdag
-    QDate bDate = QDate(1988,9,11);
-    QDate curDate = QDate::currentDate();
-
-    ui->menuF_DSELSDAG_11_SEPTEMBER->menuAction()->setVisible(false);
-    if(bDate.month() == curDate.month() && curDate.day() == bDate.day()){
-        ui->menuF_DSELSDAG_11_SEPTEMBER->menuAction()->setVisible(true);
-        qDebug() << "YAY! Oles fødselsdag!";
-    }
-
 //    CountDownTimer *cdt = new CountDownTimer(this);
 //    cdt->setGeometry(0,0,this->width(),this->height());
 //    cdt->show();
@@ -88,20 +77,6 @@ void MainWindow::on_actionOm_triggered()
            "Licens: GPL v2";
 
     QMessageBox::information(this,"Om",text);
-}
-
-void MainWindow::on_actionH_r_sangen_triggered()
-{
-    QMediaPlayer *player = new QMediaPlayer(this);
-    player->setMedia(QUrl("qrc:/sounds/of.mp3"));
-    player->setVolume(100);
-    player->play();
-
-    QString text;
-    text = "I dag er det Oles fødselsdag! Hurra Hurra!";
-    QMessageBox::information(this,"Oles fødelsdag",text);
-
-    player->stop();
 }
 
 void MainWindow::on_actionFuldsk_rm_Vindue_triggered()
