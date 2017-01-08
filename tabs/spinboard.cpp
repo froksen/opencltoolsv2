@@ -32,7 +32,7 @@ SpinBoard::SpinBoard(QWidget *parent) :
     connect(blinkTimer,SIGNAL(timeout()),this,SLOT(blinkTimerTimeOut()));
 
     //Tilføjer mulighederne for BOARDET
-    ui->cbBoardSize->addItem(QString("CL Teamplade"),4);
+    //ui->cbBoardSize->addItem(QString("CL Teamplade"),4);
     for(int i=6;i>=2;i--){
          ui->cbBoardSize->addItem(QString("%1 felter").arg(i),i);
     }
@@ -131,8 +131,8 @@ void SpinBoard::paintEvent(QPaintEvent *event)
     QGraphicsEllipseItem *board = getScene()->addEllipse(0,0,circleRadius,circleRadius,QPen(Qt::black),QBrush(Qt::white));
 
     if(ui->cbBoardSize->currentIndex() == 0){
-        getScene()->addPixmap(QPixmap(":/img/CL_Teamplade.png").scaled(circleRadius,circleRadius,Qt::KeepAspectRatio,Qt::SmoothTransformation));
-        board->setVisible(false);
+        //getScene()->addPixmap(QPixmap(":/img/CL_Teamplade.png").scaled(circleRadius,circleRadius,Qt::KeepAspectRatio,Qt::SmoothTransformation));
+        //board->setVisible(false);
     }
 
     //TEGNER LINJERNE
@@ -174,10 +174,10 @@ void SpinBoard::paintEvent(QPaintEvent *event)
 
         //Tegner linjen
         //painter.drawLine(line);
-         if(ui->cbBoardSize->currentIndex() != 0){
+         //if(ui->cbBoardSize->currentIndex() != 0){
              getScene()->addLine(line);
              getScene()->addLine(lineNum,QPen(Qt::transparent));
-        }
+        //}
 
          if(!blinkTimer->isActive()){
              if(chosenNumber == i){
@@ -191,7 +191,7 @@ void SpinBoard::paintEvent(QPaintEvent *event)
          }
 
 
-         if(ui->cbBoardSize->currentIndex() != 0){
+         //if(ui->cbBoardSize->currentIndex() != 0){
              QFont txtFont; //= new QFont();
              txtFont.setPixelSize(48);
 
@@ -199,7 +199,7 @@ void SpinBoard::paintEvent(QPaintEvent *event)
              txt->setFont(txtFont);
              txt->setX(lineNum.p2().x());
              txt->setY(lineNum.p2().y()-txtFont.pixelSize());
-         }
+         //}
 
     }
 }
