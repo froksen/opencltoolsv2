@@ -9,7 +9,6 @@
 #include "tabs/powerpausepicker.h"
 #include "tabs/stopwatch.h"
 #include "tabs/clock.h"
-//#include "tabs/CooperativeLearning/teamplate.h"
 #include "tabs/groupcreator.h"
 #include <QMessageBox>
 #include <QMediaPlayer>
@@ -48,7 +47,6 @@ MainWindow::MainWindow(QWidget *parent) :
     qDebug() << "Gruppeskaber";
     ui->tabWidget->addTab(new GroupCreator,"Gruppeskaber");
     //ui->tabWidget->addTab(new OrderChooser,"Gl. Gruppeskaber");
-//    //ui->tabWidget->addTab(new TeamPlate,"CL: Teamplade");
     ui->tabWidget->setCurrentIndex(0);
 
 

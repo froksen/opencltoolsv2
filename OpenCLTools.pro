@@ -32,7 +32,6 @@ SOURCES += main.cpp\
     classes/powerpausemanager.cpp \
     dialogs/powerpauseform.cpp \
     dialogs/powerpauseviewer.cpp \
-    tabs/CooperativeLearning/teamplate.cpp \
     tabs/groupcreator.cpp \
     dialogs/simplesqlmanager.cpp \
     classes/databasemanager.cpp \
@@ -59,7 +58,6 @@ HEADERS  += mainwindow.h \
     classes/powerpausemanager.h \
     dialogs/powerpauseform.h \
     dialogs/powerpauseviewer.h \
-    tabs/CooperativeLearning/teamplate.h \
     tabs/groupcreator.h \
     dialogs/simplesqlmanager.h \
     classes/databasemanager.h \
@@ -83,7 +81,6 @@ FORMS    += mainwindow.ui \
     dialogs/powerpauseadmin.ui \
     dialogs/powerpauseform.ui \
     dialogs/powerpauseviewer.ui \
-    tabs/CooperativeLearning/teamplate.ui \
     tabs/groupcreator.ui \
     dialogs/simplesqlmanager.ui \
     dialogs/sqlmanager.ui \
