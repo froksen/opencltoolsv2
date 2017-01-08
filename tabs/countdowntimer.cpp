@@ -34,6 +34,9 @@ CountDownTimer::CountDownTimer(QWidget *parent) :
 
     timerIntervalAtStart = 0;
 
+    //Skjuler JBCountdown knappen.
+    ui->cbJBEffekt->setVisible(false);
+
 }
 
 CountDownTimer::~CountDownTimer()
@@ -102,7 +105,7 @@ void CountDownTimer::tickTimerTimeout()
         qDebug() << "STATE" << getAudioPlayer()->state();
         if(getAudioPlayer()->state() != QMediaPlayer::PlayingState){
             qDebug() << "JBEffect started";
-            getAudioPlayer()->setMedia(QUrl("qrc:/sounds/jbcountdown.mp3"));
+            //getAudioPlayer()->setMedia(QUrl("qrc:/sounds/jbcountdown.mp3"));
             getAudioPlayer()->setVolume(100);
             getAudioPlayer()->play();
         }
