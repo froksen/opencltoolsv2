@@ -68,6 +68,7 @@ void SelectorFinger::on_btnNewOutcome_clicked()
     }
 
     //Starter animationen;
+    animationTimerAttemts = 25;
     animationTimer->start();
 }
 
@@ -209,17 +210,21 @@ void SelectorFinger::on_cbShowInstant_clicked(bool checked)
 
 void SelectorFinger::on_animationtimer_timeout()
 {
-
-    if(animationTimerAttemts<25){
-        qDebug() << "Animation timer attempt " << animationTimerAttemts << "of" << 50;
-        showResult();
-        animationTimerAttemts++;
-    }
-    else {
+    if(--animationTimerAttemts <= 0)
+    {
         animationTimer->stop();
-        qDebug() << "Animation timer stopped";
-        animationTimerAttemts = 0;
     }
+    showResult();
+//    if(animationTimerAttemts<25){
+//        qDebug() << "Animation timer attempt " << animationTimerAttemts << "of" << 50;
+//        showResult();
+//        animationTimerAttemts++;
+//    }
+//    else {
+//        animationTimer->stop();
+//        qDebug() << "Animation timer stopped";
+//        animationTimerAttemts = 0;
+//    }
 
 }
 
