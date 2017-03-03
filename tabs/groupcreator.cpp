@@ -455,7 +455,7 @@ void GroupCreator::updateAvailableMemebersTable()
     QStringList classNames;
     classNames.append("Vis alle");
     for(int i=0;i<ui->availableMembers->model()->rowCount();i++){
-        QModelIndex index = ui->availableMembers->model()->index(i,2,QModelIndex());
+        QModelIndex index = ui->availableMembers->model()->index(i,1,QModelIndex());
         QString className = ui->availableMembers->model()->data(index).toString();
 
         if(!classNames.contains(className) && className != ""){
@@ -471,7 +471,7 @@ void GroupCreator::updateAvailableMemebersTable()
     if(ui->filterClass->currentText() != "Vis alle"){
         QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel(this);
         proxyModel->setSourceModel(model);
-        proxyModel->setFilterKeyColumn(2);
+        proxyModel->setFilterKeyColumn(1);
         proxyModel->setFilterRegExp(QRegExp(ui->filterClass->currentText(), Qt::CaseInsensitive,
                                             QRegExp::FixedString));
 
