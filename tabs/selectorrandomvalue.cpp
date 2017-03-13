@@ -124,10 +124,17 @@ void SelectorRandomValue::resizeEvent(QResizeEvent *)
 
 void SelectorRandomValue::on_excludeOutcomeButton_clicked()
 {
+    QString numString;
+    foreach(int num,rnd.getExcludeOutComes())
+    {
+        numString.append(QString::number(num));
+        numString.append(";");
+    }
+
     bool ok;
     QString text = QInputDialog::getText(this, tr("Udeluk udfald"),
                                          tr("Skriv hvilke tal du vil udelukke. Skriv tallene adskildt med semikolon (1;3;4)"), QLineEdit::Normal,
-                                         "", &ok);
+                                         numString, &ok);
 
     if(ok)
     {

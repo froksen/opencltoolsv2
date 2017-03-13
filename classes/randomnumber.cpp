@@ -135,4 +135,9 @@ QList<int> RandomNumber::getExcludeOutComes() const
 void RandomNumber::setExcludeOutComes(const QList<int> &excludeOutComes)
 {
     _excludeOutComes = excludeOutComes;
+    qDebug() << "ExcludeList updated to: " << _excludeOutComes;
+
+    if(isValid()){
+        updateAvailableOutComes();
+    }
 }
