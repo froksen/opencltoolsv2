@@ -23,6 +23,8 @@ private slots:
     void on_btnNewNumber_clicked();
     void on_cbAllowSameOutcomeTwice_clicked(bool checked);
 
+    void on_excludeOutcomeButton_clicked();
+
 private:
     Ui::SelectorRandomValue *ui;
 

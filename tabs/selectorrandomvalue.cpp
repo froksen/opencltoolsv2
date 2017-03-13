@@ -1,7 +1,7 @@
 #include "selectorrandomvalue.h"
 #include "ui_selectorrandomvalue.h"
-
-
+#include <QInputDialog>
+#include <QDebug>
 
 SelectorRandomValue::SelectorRandomValue(QWidget *parent) :
     QWidget(parent),
@@ -120,4 +120,29 @@ void SelectorRandomValue::resizeEvent(QResizeEvent *)
     QFont font;
     font.setPixelSize(this->width()/5);
     ui->lblNumber->setFont(font);
+}
+
+void SelectorRandomValue::on_excludeOutcomeButton_clicked()
+{
+    bool ok;
+    QString text = QInputDialog::getText(this, tr("Udeluk udfald"),
+                                         tr("Skriv hvilke tal du vil udelukke. Skriv tallene adskildt med semikolon (1;3;4)"), QLineEdit::Normal,
+                                         "", &ok);
+
+    if(ok)
+    {
+        QList<int> excludeList;
+        foreach(QString number, text.split(";"))
+        {
+            bool isNumber;
+            int intNumber = number.toInt(&isNumber);
+
+            if(isNumber)
+            {
+                  excludeList.append(intNumber);
+            }
+        }
+        qDebug() << "Excluding " << excludeList;
+        rnd.setExcludeOutComes(excludeList);
+    }
 }
