@@ -18,8 +18,12 @@ public:
     void setAllowSameOutcomeTwice(bool state = true);
     bool allowSameOutcomeTwice();
     bool isValid();
+    void setExcludeOutComes(const QList<int> &excludeOutComes);
+
+
 
 private:
+    QList<int> getExcludeOutComes() const;
     int getPreviousRandomValue() const;
     void setPreviousRandomValue(int value);
     int pickRandomNumber();
@@ -32,6 +36,7 @@ private:
     int previousRandomValue;
     bool allowSameOutcome;
     QList<int> _availableOutComes;
+    QList<int> _excludeOutComes;
 };
 
 

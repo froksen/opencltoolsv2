@@ -113,7 +113,11 @@ void RandomNumber::updateAvailableOutComes()
     if(isValid()){
         //Tilføjer de mulige udfald til listen
         for(int i=getLower();i<=getUpper();i++){
-            outcomes.append(i);
+            //Hvis ikke værdien er fravalgt, da tilføj til listen
+            if(!getExcludeOutComes().contains(i))
+            {
+               outcomes.append(i);
+            }
         }
     }
 
@@ -121,4 +125,14 @@ void RandomNumber::updateAvailableOutComes()
     qDebug() << outcomes;
     //Sætter de nye muligheder
     setAvailableOutComes(outcomes);
+}
+
+QList<int> RandomNumber::getExcludeOutComes() const
+{
+    return _excludeOutComes;
+}
+
+void RandomNumber::setExcludeOutComes(const QList<int> &excludeOutComes)
+{
+    _excludeOutComes = excludeOutComes;
 }
