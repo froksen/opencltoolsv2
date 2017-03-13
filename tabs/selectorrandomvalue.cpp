@@ -133,7 +133,7 @@ void SelectorRandomValue::on_excludeOutcomeButton_clicked()
 
     bool ok;
     QString text = QInputDialog::getText(this, tr("Udeluk udfald"),
-                                         tr("Skriv hvilke tal du vil udelukke. Skriv tallene adskildt med semikolon (1;3;4)"), QLineEdit::Normal,
+                                         tr("Skriv hvilke tal du vil udelukke. Skriv tallene adskildt med semikolon f.eks. 1;3;4"), QLineEdit::Normal,
                                          numString, &ok);
 
     if(ok)

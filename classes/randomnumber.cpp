@@ -121,7 +121,6 @@ void RandomNumber::updateAvailableOutComes()
         }
     }
 
-
     qDebug() << outcomes;
     //Sætter de nye muligheder
     setAvailableOutComes(outcomes);
