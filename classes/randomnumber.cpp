@@ -3,8 +3,8 @@
 
 RandomNumber::RandomNumber()
 {
-    setLower(0);
-    setUpper(1);
+    upper = 0;
+    lower = 1;
     setAllowSameOutcomeTwice(false);
 }
 
