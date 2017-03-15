@@ -32,17 +32,12 @@ private slots:
     void on_gotoSelectMembersPage_clicked();
     void on_adminPersonsButton_clicked();
     void on_copyToClipboard_clicked();
-
     void on_useTeamNameInList_clicked();
-
     void on_availableMembers_doubleClicked(const QModelIndex &index);
-
     void on_selectedMembers_doubleClicked(const QModelIndex &index);
-
-
     void on_filterClass_activated(const QString &arg1);
-
     void on_helpButton1_clicked();
+    void on_filterGroupOptions_valueChanged(int arg1);
 
 private:
     Ui::GroupCreator *ui;
@@ -67,6 +62,9 @@ private:
     void updateAvailableMemebersTable();
     void addMember();
     void removeMember();
+
+    //
+    void filterGroupOptions(int groupSize);
 
 protected:
     void keyPressEvent(QKeyEvent *event);

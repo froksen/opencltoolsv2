@@ -17,7 +17,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tabSelectMembers">
       <attribute name="title">
@@ -236,37 +236,7 @@
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <item>
            <layout class="QGridLayout" name="gridLayout_2">
-            <item row="3" column="0" colspan="2">
-             <widget class="QComboBox" name="groupSizeOptions"/>
-            </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="label_3">
-              <property name="font">
-               <font>
-                <weight>75</weight>
-                <bold>true</bold>
-               </font>
-              </property>
-              <property name="text">
-               <string>Mindste</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QSpinBox" name="groupSizeMax">
-              <property name="minimum">
-               <number>2</number>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QSpinBox" name="groupSizeMin">
-              <property name="minimum">
-               <number>1</number>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
+            <item row="0" column="2">
              <widget class="QLabel" name="label_4">
               <property name="font">
                <font>
@@ -279,7 +249,30 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="0" colspan="2">
+            <item row="3" column="1" colspan="2">
+             <widget class="QComboBox" name="groupSizeOptions"/>
+            </item>
+            <item row="1" column="2">
+             <widget class="QSpinBox" name="groupSizeMax">
+              <property name="minimum">
+               <number>2</number>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="label_3">
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Mindste</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1" colspan="2">
              <layout class="QGridLayout" name="gridLayout_3" columnstretch="0,1">
               <item row="0" column="0">
                <widget class="QLabel" name="label_5">
@@ -309,7 +302,14 @@
               </item>
              </layout>
             </item>
-            <item row="4" column="0">
+            <item row="1" column="1">
+             <widget class="QSpinBox" name="groupSizeMin">
+              <property name="minimum">
+               <number>1</number>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="1">
              <widget class="QCheckBox" name="useTeamNameInList">
               <property name="text">
                <string>Brug holdbetegnelse i liste</string>
@@ -318,6 +318,40 @@
                <bool>false</bool>
               </property>
              </widget>
+            </item>
+            <item row="5" column="1">
+             <layout class="QHBoxLayout" name="horizontalLayout_3">
+              <item>
+               <widget class="QLabel" name="label_7">
+                <property name="text">
+                 <string>Filter muligheder (Sæt til 0, for at se alle muligheder)</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="filterGroupOptions">
+                <property name="toolTip">
+                 <string>Filter mulighederne for gruppestørrelse. Således at man kun ser alle de muligheder hvor der dannes et antal grupper.</string>
+                </property>
+                <property name="maximum">
+                 <number>1000</number>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_7">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
             </item>
            </layout>
           </item>

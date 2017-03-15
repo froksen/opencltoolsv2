@@ -13,6 +13,7 @@
 #include <QDesktopServices>
 #include <QTemporaryDir>
 #include <QSqlError>
+#include <QStringListModel>
 
 GroupCreator::GroupCreator(QWidget *parent) :
     QWidget(parent),
@@ -553,6 +554,25 @@ void GroupCreator::removeMember()
     ui->selectedMembersCount->setText(QString("(%1)").arg(selectedMembers()->rowCount()));
 }
 
+void GroupCreator::filterGroupOptions(int groupSize)
+{
+    calulateGroupSizeOptions();
+
+    for(int i=ui->groupSizeOptions->count();i>=0;i--)
+    {
+        QString currentOption = ui->groupSizeOptions->itemText(i);
+        QStringList fullTextList = currentOption.split(" "); //Deler den oprindelig tekst ved mellemrum
+        QStringList numTextList = QString(fullTextList.at(0)).split(" "); //Deler den første del (med nummeret) igen ved mellemrum.
+        int optionGroupSize = QString(QString(numTextList.at(0)).remove(0,1)).toInt(); //Den første del fra numTextList er nummeret. Dog fjernet første tegn (parentesen)
+
+        if(optionGroupSize != groupSize)
+        {
+            ui->groupSizeOptions->removeItem(i);
+        }
+
+    }
+}
+
 void GroupCreator::keyPressEvent(QKeyEvent *event)
 {
     if(event->matches( QKeySequence::Copy )){
@@ -712,4 +732,15 @@ void GroupCreator::on_helpButton1_clicked()
     }
 
     QDesktopServices::openUrl(QUrl(hFileTmp.fileName()));
+}
+
+void GroupCreator::on_filterGroupOptions_valueChanged(int arg1)
+{
+    if(ui->filterGroupOptions->value() == 0)
+    {
+        calulateGroupSizeOptions();
+        return;
+    }
+
+    filterGroupOptions(arg1);
 }
