@@ -47,6 +47,9 @@ GroupCreator::GroupCreator(QWidget *parent) :
     ui->groupsOverview->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
 
 
+    //Skjules, da det alligevel ikke virker ordenligt PT
+    ui->filterClass->setVisible(false);
+    ui->label_6->setVisible(false);
 }
 
 GroupCreator::~GroupCreator()

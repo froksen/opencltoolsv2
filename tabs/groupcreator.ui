@@ -17,7 +17,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabSelectMembers">
       <attribute name="title">
@@ -37,6 +37,13 @@
           <widget class="QComboBox" name="filterClass"/>
          </item>
         </layout>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_8">
+         <property name="text">
+          <string>TIP: Tryk på kolonnenavnene for at sortere tabellerne.</string>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QLabel" name="label">

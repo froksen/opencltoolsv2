@@ -47,7 +47,7 @@ MainWindow::MainWindow(QWidget *parent) :
     qDebug() << "Gruppeskaber";
     ui->tabWidget->addTab(new GroupCreator,"Gruppeskaber");
     //ui->tabWidget->addTab(new OrderChooser,"Gl. Gruppeskaber");
-    ui->tabWidget->setCurrentIndex(8);
+    ui->tabWidget->setCurrentIndex(0);
 
 
     ui->mainToolBar->setHidden(true);
