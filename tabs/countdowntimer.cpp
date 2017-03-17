@@ -38,6 +38,9 @@ CountDownTimer::CountDownTimer(QWidget *parent) :
     //Skjuler JBCountdown knappen.
     ui->cbJBEffekt->setVisible(false);
 
+    //Alarmmode
+    alarmMode = false;
+
 }
 
 CountDownTimer::~CountDownTimer()
@@ -176,12 +179,14 @@ void CountDownTimer::toggleButtons()
     ui->btnStartStop->setEnabled(true);
     ui->cbLoopCountdown->setEnabled(true);
     ui->cbJBEffekt->setEnabled(true);
+    ui->btnSetalarm->setEnabled(true);
 
     if(tickTimer->isActive()){
         ui->btnReset->setEnabled(false);
         ui->btnSetInterval->setEnabled(false);
         ui->cbLoopCountdown->setEnabled(false);
         ui->cbJBEffekt->setEnabled(false);
+        ui->btnSetalarm->setEnabled(false);
     }
 }
 
@@ -202,6 +207,16 @@ bool CountDownTimer::runTimer()
     toggleButtons();
 
     return true;
+}
+
+bool CountDownTimer::getAlarmMode() const
+{
+    return alarmMode;
+}
+
+void CountDownTimer::setAlarmMode(bool value)
+{
+    alarmMode = value;
 }
 
 
@@ -270,6 +285,9 @@ void CountDownTimer::on_btnSetInterval_clicked()
         ui->lblTime->setPalette(palette);
 
         ui->progressBar->setMaximum(timerIntervalAtStart);
+
+        //Slår alarmmode fra
+         setAlarmMode(false);
     }
 
     //Sletter pointer
@@ -303,6 +321,33 @@ void CountDownTimer::on_cbJBEffekt_clicked()
 
 void CountDownTimer::on_btnSetalarm_clicked()
 {
-    alarmselector mAlarmselector;
-    mAlarmselector.exec();
+    alarmselector *mAlarmselector = new alarmselector(this);
+    connect(mAlarmselector,SIGNAL(accepted()),this,SLOT(alarmSelectorAccepted()));
+    connect(mAlarmselector,SIGNAL(timeString(QString)),this,SLOT(alarmSelector_alarmChanged(QString)));
+    mAlarmselector->exec();
+}
+
+void CountDownTimer::alarmSelectorAccepted()
+{
+    setAlarmMode(true);
+}
+
+void CountDownTimer::alarmSelector_alarmChanged(QString time)
+{
+    qDebug() << "time" << time;
+    QTime endTime;
+    endTime = endTime.fromString(time);
+    qDebug() << "endTime" << endTime.msecsSinceStartOfDay();
+    QTime currentTime;
+    currentTime = currentTime.currentTime();
+    qDebug() << "currentTime" << currentTime.msecsSinceStartOfDay();
+
+    int diffTime = endTime.msecsSinceStartOfDay() - currentTime.msecsSinceStartOfDay();
+
+    setTimerInterval(diffTime);
+
+    QString timeFormat = "HH:mm:ss";
+    ui->lblTime->setText(QTime(0,0,0).addMSecs(getTimerInterval()).toString(timeFormat));
+    on_btnStartStop_clicked();
+    timerIntervalAtStart = diffTime;
 }

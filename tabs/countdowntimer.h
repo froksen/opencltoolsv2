@@ -19,6 +19,9 @@ public:
     ~CountDownTimer();
 
 
+    bool getAlarmMode() const;
+    void setAlarmMode(bool value);
+
 private slots:
     void timerTimeout();
     void tickTimerTimeout();
@@ -33,6 +36,9 @@ private slots:
 
         void on_btnSetalarm_clicked();
 
+        void alarmSelectorAccepted();
+        void alarmSelector_alarmChanged(QString);
+
 private:
     Ui::CountDownTimer *ui;
 
@@ -44,10 +50,9 @@ private:
 
     QMediaPlayer *getAudioPlayer() const;
     void setAudioPlayer(QMediaPlayer *audioPlayer);
-
-
     bool runTimer();
 
+    bool alarmMode;
 
     QTimer *timer;
     QTimer *tickTimer;

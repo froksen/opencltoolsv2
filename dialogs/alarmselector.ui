@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>299</width>
-    <height>141</height>
+    <height>160</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Sæt alarm</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -126,7 +126,7 @@
      <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
-       <height>3</height>
+       <height>16</height>
       </size>
      </property>
     </spacer>
@@ -137,7 +137,7 @@
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok|QDialogButtonBox::Reset</set>
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
     </widget>
    </item>

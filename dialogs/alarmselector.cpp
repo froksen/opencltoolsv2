@@ -4,6 +4,8 @@
 #include <QDebug>
 #include <QPushButton>
 #include <QTimer>
+#include <QAbstractButton>
+#include <QSpinBox>
 
 alarmselector::alarmselector(QWidget *parent) :
     QDialog(parent),
@@ -20,6 +22,9 @@ alarmselector::alarmselector(QWidget *parent) :
     connect(validateTimer,SIGNAL(timeout()),this,SLOT(validateTime()));
     validateTimer->setInterval(1000);
     validateTimer->start();
+
+
+    ui->buttonBox->button(QDialogButtonBox::Ok)->setText("Sæt og start nedtælling");
 }
 
 alarmselector::~alarmselector()
@@ -68,4 +73,16 @@ void alarmselector::validateTime()
         ui->lblNotice->setVisible(false);
         ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
     }
+}
+
+void alarmselector::on_buttonBox_accepted()
+{
+    int hours = ui->sbHours->value();
+    int minuts = ui->sbMinuts->value();
+    int seconds = ui->sbSecs->value();
+
+    QTime time;
+    time.setHMS(hours,minuts,seconds);
+
+    emit timeString(time.toString());
 }
