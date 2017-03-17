@@ -37,7 +37,8 @@ SOURCES += main.cpp\
     classes/databasemanager.cpp \
     dialogs/sqlmanager.cpp \
     tabs/clock.cpp \
-    tabs/stopwatch.cpp
+    tabs/stopwatch.cpp \
+    dialogs/alarmselector.cpp
 
 HEADERS  += mainwindow.h \
     tabs/countdowntimer.h \
@@ -63,7 +64,8 @@ HEADERS  += mainwindow.h \
     classes/databasemanager.h \
     dialogs/sqlmanager.h \
     tabs/clock.h \
-    tabs/stopwatch.h
+    tabs/stopwatch.h \
+    dialogs/alarmselector.h
 
 
 FORMS    += mainwindow.ui \
@@ -85,7 +87,8 @@ FORMS    += mainwindow.ui \
     dialogs/simplesqlmanager.ui \
     dialogs/sqlmanager.ui \
     tabs/clock.ui \
-    tabs/stopwatch.ui
+    tabs/stopwatch.ui \
+    dialogs/alarmselector.ui
 
 RESOURCES += \
     resource.qrc
