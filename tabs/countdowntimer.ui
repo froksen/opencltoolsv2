@@ -113,6 +113,13 @@
      </item>
      <item>
       <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="2">
+        <widget class="QPushButton" name="btnReset">
+         <property name="text">
+          <string>Nulstil</string>
+         </property>
+        </widget>
+       </item>
        <item row="0" column="0">
         <widget class="QPushButton" name="btnSetInterval">
          <property name="text">
@@ -121,9 +128,9 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QPushButton" name="btnReset">
+        <widget class="QPushButton" name="btnSetalarm">
          <property name="text">
-          <string>Nulstil</string>
+          <string>Sæt alarm</string>
          </property>
         </widget>
        </item>

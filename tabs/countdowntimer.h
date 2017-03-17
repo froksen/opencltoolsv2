@@ -31,6 +31,8 @@ private slots:
 
         void on_cbJBEffekt_clicked();
 
+        void on_btnSetalarm_clicked();
+
 private:
     Ui::CountDownTimer *ui;
 

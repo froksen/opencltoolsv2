@@ -1,6 +1,7 @@
 #include "countdowntimer.h"
 #include "ui_countdowntimer.h"
 #include "dialogs/timeselector.h"
+#include "dialogs/alarmselector.h"
 #include <QDebug>
 #include <QDateTime>
 #include <QTime>
@@ -298,4 +299,10 @@ void CountDownTimer::on_view1000parts_clicked(bool checked)
 void CountDownTimer::on_cbJBEffekt_clicked()
 {
 
+}
+
+void CountDownTimer::on_btnSetalarm_clicked()
+{
+    alarmselector mAlarmselector;
+    mAlarmselector.exec();
 }

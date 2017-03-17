@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>299</width>
-    <height>122</height>
+    <height>141</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -110,6 +110,13 @@
       </widget>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="QLabel" name="lblNotice">
+     <property name="text">
+      <string>OBS: Det valgte tidspunkt ligger i fortiden.</string>
+     </property>
+    </widget>
    </item>
    <item>
     <spacer name="verticalSpacer">
