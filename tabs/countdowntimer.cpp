@@ -325,6 +325,9 @@ void CountDownTimer::on_btnSetalarm_clicked()
     connect(mAlarmselector,SIGNAL(accepted()),this,SLOT(alarmSelectorAccepted()));
     connect(mAlarmselector,SIGNAL(timeString(QString)),this,SLOT(alarmSelector_alarmChanged(QString)));
     mAlarmselector->exec();
+
+    delete mAlarmselector;
+    mAlarmselector = 0;
 }
 
 void CountDownTimer::alarmSelectorAccepted()
