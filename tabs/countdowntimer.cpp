@@ -350,4 +350,10 @@ void CountDownTimer::alarmSelector_alarmChanged(QString time)
     ui->lblTime->setText(QTime(0,0,0).addMSecs(getTimerInterval()).toString(timeFormat));
     on_btnStartStop_clicked();
     timerIntervalAtStart = diffTime;
+
+    QPalette palette = ui->lblTime->palette();
+    palette.setColor(ui->lblTime->foregroundRole(), Qt::black);
+    ui->lblTime->setPalette(palette);
+
+    ui->progressBar->setMaximum(timerIntervalAtStart);
 }
