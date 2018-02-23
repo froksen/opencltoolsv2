@@ -39,6 +39,8 @@ private slots:
         void alarmSelectorAccepted();
         void alarmSelector_alarmChanged(QString);
 
+        void on_showAsMillisecs_clicked();
+
 private:
     Ui::CountDownTimer *ui;
 

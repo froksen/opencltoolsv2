@@ -125,7 +125,13 @@ void CountDownTimer::tickTimerTimeout()
     if(ui->view1000parts->isChecked()){
         timeFormat = "HH:mm:ss:zzz";
     }
+
     timeText = QTime(0,0,0).addMSecs(getTimerRemainingTime()).toString(timeFormat);
+
+    if(ui->showAsMillisecs->isChecked()){
+        timeText = QString::number(getTimerRemainingTime());
+    }
+
 
 
 
@@ -359,4 +365,16 @@ void CountDownTimer::alarmSelector_alarmChanged(QString time)
     ui->lblTime->setPalette(palette);
 
     ui->progressBar->setMaximum(timerIntervalAtStart);
+}
+
+void CountDownTimer::on_showAsMillisecs_clicked()
+{
+    ui->view1000parts->setChecked(false);
+
+    ui->view1000parts->setEnabled(true);
+
+    if(ui->showAsMillisecs->isChecked())
+    {
+        ui->view1000parts->setEnabled(false);
+    }
 }
